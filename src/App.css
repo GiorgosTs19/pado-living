@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure these elements fill the viewport */
+  overflow: hidden; /* Prevent multiple scrollbars unless managed intentionally */
+}
+
+body {
+  font-family: 'Inter', sans-serif; /* Use a valid font loaded in your HTML */
+  @apply min-h-dvh bg-[linear-gradient(to_bottom,_#EEECE7,_#E7E4DF)] shadow-inner shadow-[#ccc]/30;
+  @apply text-[#444] antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: white;
+  opacity: 0.4;
+  backdrop-filter: blur(6px);
+}
+
+#root {
+  display: flex; /* Use flexbox or grid for layout if necessary */
+  flex-direction: column; /* Stack child components vertically */
+  min-height: 100vh; /* Ensure #root stretches to at least the viewport height */
+  overflow-y: auto; /* Allow vertical scrolling only within #root */
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #888 transparent; /* Thumb color and transparent track */
+  scroll-behavior: smooth;
+}
+
+/* Webkit Browsers (e.g., Chrome, Edge, Safari) */
+#root::-webkit-scrollbar {
+  width: 2px; /* Width of the vertical scrollbar */
+  height: 5px; /* Height of the horizontal scrollbar */
+  z-index: 100;
+}
+
+#root::-webkit-scrollbar-track {
+  background: transparent; /* Make the track transparent */
+}
+
+#root::-webkit-scrollbar-thumb {
+  background-color: #888; /* Thumb background color */
+  border-radius: 6px; /* Rounded corners for the thumb */
+  border: 3px solid transparent; /* Padding around the thumb */
+}
+
+#root::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Thumb background on hover */
+}
