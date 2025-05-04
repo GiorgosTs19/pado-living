@@ -1,3 +1,22 @@
 {
-
+  "sections":  {
+    "hero" : {
+      "Title" : "Pado Living"
+    },
+    "rooms" : {
+      "Title": "Rooms",
+      "View-1":"Bed & Balcony View",
+      "View-2":"Cozy Bedside Angle",
+      "View-3":"Desk and Balcony Access",
+      "View-4":"Modern Amenities"
+    },
+    "pado" : {
+      "description" : "Just an 8-minute walk from Faliraki Beach, Pado Living offers a serene escape with air-conditioned rooms, a lush garden, and free private parking. Guests enjoy modern comforts like flat-screen TVs, minibars, and free Wi-Fi.\n \nSelect rooms feature balconies with scenic views or peaceful garden settings. With a daily continental breakfast and close proximity to Rhodes’ historic sites and airport, Pado Living blends relaxation with convenience.",
+      "buttons": {
+        "Rooms" : "Rooms",
+        "Breakfast" : "Breakfast",
+        "Contact" : "Contact"
+      }
+    }
+  }
 }

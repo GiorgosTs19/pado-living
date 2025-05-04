@@ -1,10 +1,11 @@
-import { Hero } from '@/components';
+import { Gallery, Hero, Pado } from '@/components';
 
 export function Homepage() {
   return (
-    <div>
+    <>
       <Hero />
-      <div className={'h-dvh flex items-center justify-center'}>gfdhgsdh</div>
-    </div>
+      <Pado />
+      <Gallery />
+    </>
   );
 }

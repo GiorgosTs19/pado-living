@@ -1,6 +1,5 @@
 import plugin from 'tailwindcss/plugin';
 
-/** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,html}'],
   theme: {
@@ -11,14 +10,14 @@ export default {
       colors: {
         'bg-overlay': 'rgba(0, 0, 0, 0.7)', // Optional overlay color
 
-        primary: '#DAC5A7',
-        subtitle: '#BFAD93',
-        border: '#3C3933',
-        secondary: '#22201E',
-        highlight: '#ffffff',
-        silent: 'rgba(218, 197, 167, .6)',
-        chill: 'rgb(156 163 175)',
-        input: '#22201E',
+        primary: '#E6D3C4', // Soft sandy beige — dominant brand color
+        subtitle: '#C6B4A5', // Muted warm taupe — for subtitles or accents
+        border: '#867C74', // Earthy brown-gray — natural contrast for borders
+        secondary: '#3D3732', // Rich espresso — for footers or text on light bg
+        highlight: '#FFFFFF', // Pure white — to keep clean highlights
+        silent: 'rgba(230, 211, 196, 0.5)', // Semi-transparent tone of primary
+        chill: '#A49D94', // Soft gray-beige — for muted elements like placeholder text
+        input: '#3D3732',
       },
       keyframes: {
         'border-expand': {

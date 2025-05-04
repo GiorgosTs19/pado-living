@@ -34,6 +34,69 @@ body {
       background-image: url('/src/assets/images/HeroBackground-desktop.jpg');
     }
   }
+
+  @theme {
+    --color-primary: #E6D3C4;
+    --color-subtitle: #C6B4A5;
+    --color-border: #867C74;
+    --color-secondary: #3D3732;
+    --color-highlight: #FFFFFF;
+    --color-silent: rgba(230, 211, 196, 0.5);
+    --color-chill: #A49D94;
+    --color-input: #3D3732;
+  }
+
+  .text-clip {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-shadow {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes bg-pan-down {
+    from {
+      background-position: center 50%;
+    }
+    to {
+      background-position: center 85%;
+    }
+  }
+
+
+
+  @media (min-width: 640px) {
+    @keyframes bg-pan-down {
+      from {
+        background-position: center 5%;
+      }
+      to {
+        background-position: center 20%;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    @keyframes bg-pan-down {
+      from {
+        background-position: center 85%;
+      }
+      to {
+        background-position: center 15%;
+      }
+    }
+  }
+
+  .animate-bg-pan-down {
+    animation: bg-pan-down 2s ease-in-out forwards;
+  }
 }
 
 body::before {
