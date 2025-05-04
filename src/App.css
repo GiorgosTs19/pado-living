@@ -19,18 +19,18 @@ body {
 
 /* Background images */
 @layer utilities {
-  .hero-mobile {
+  .hero-bg {
     background-image: url('/src/assets/images/HeroBackground-mobile.jpg');
   }
 
   @media (min-width: 640px) {
-    .hero-tablet {
+    .hero-bg {
       background-image: url('/src/assets/images/HeroBackground-tablet.jpg');
     }
   }
 
   @media (min-width: 1024px) {
-    .hero-desktop {
+    .hero-bg {
       background-image: url('/src/assets/images/HeroBackground-desktop.jpg');
     }
   }
