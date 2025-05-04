@@ -17,6 +17,25 @@ body {
   @apply text-[#444] antialiased;
 }
 
+/* Background images */
+@layer utilities {
+  .hero-mobile {
+    background-image: url('/src/assets/images/HeroBackground-mobile.jpg');
+  }
+
+  @media (min-width: 640px) {
+    .hero-tablet {
+      background-image: url('/src/assets/images/HeroBackground-tablet.jpg');
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-desktop {
+      background-image: url('/src/assets/images/HeroBackground-desktop.jpg');
+    }
+  }
+}
+
 body::before {
   content: '';
   position: fixed;

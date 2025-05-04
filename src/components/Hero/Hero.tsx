@@ -1,8 +1,10 @@
 export function Hero() {
   return (
     <section
-      className="relative bg-[url('src/assets/images/HeroBackground-mobile.jpg')] sm:bg-[url('src/assets/images/HeroBackground-tablet.jpg')] lg:bg-[url('src/assets/images/HeroBackground-desktop.jpg')]
-              bg-cover bg-no-repeat bg-center h-dvh w-full flex items-center justify-center rounded-b-3xl"
+      className={
+        `relative hero-mobile sm:hero-tablet lg:hero-desktop ` +
+        'bg-cover bg-no-repeat bg-center h-dvh w-full flex items-center justify-center rounded-b-3xl'
+      }
     >
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-b from-transparent to-[#E7E4DF] z-10 pointer-events-none rounded-b-3xl" />
       <div className="text-white text-center px-4">
