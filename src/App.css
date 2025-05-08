@@ -44,6 +44,7 @@ body {
     --color-silent: rgba(230, 211, 196, 0.5);
     --color-chill: #A49D94;
     --color-input: #3D3732;
+    --color-semiTransparent: rgba(255, 255, 255, 0.9);
   }
 
   .text-clip {

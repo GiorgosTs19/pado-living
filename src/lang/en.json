@@ -1,21 +1,52 @@
 {
   "sections":  {
     "hero" : {
-      "Title" : "Pado Living"
+      "title" : "Pado Living"
     },
     "rooms" : {
-      "Title": "Rooms",
-      "View-1":"Bed & Balcony View",
-      "View-2":"Cozy Bedside Angle",
-      "View-3":"Desk and Balcony Access",
-      "View-4":"Modern Amenities"
+      "title": "A Look Inside",
+      "view-1":"Bed & Balcony",
+      "view-2":"Cozy Bedside Angle",
+      "view-3":"Balcony Access",
+      "view-4":"Modern Amenities",
+      "view-5":"Bathroom & Shower",
+      "description-1":"Wake up to natural light and step out onto a private balcony overlooking the serene surroundings.",
+      "description-2":"A warm, inviting corner with soft lighting and plush bedding for a restful night’s sleep.",
+      "description-3":"Functional workspace paired with direct balcony access — ideal for work or relaxation.",
+      "description-4":"Smart TV, air conditioning, and thoughtful touches ensure a comfortable and connected stay.",
+      "description-5":"Clean, modern bathroom with a walk-in shower and all essential toiletries provided."
     },
     "pado" : {
       "description" : "Just an 8-minute walk from Faliraki Beach, Pado Living offers a serene escape with air-conditioned rooms, a lush garden, and free private parking. Guests enjoy modern comforts like flat-screen TVs, minibars, and free Wi-Fi.\n \nSelect rooms feature balconies with scenic views or peaceful garden settings. With a daily continental breakfast and close proximity to Rhodes’ historic sites and airport, Pado Living blends relaxation with convenience.",
       "buttons": {
-        "Rooms" : "Rooms",
-        "Breakfast" : "Breakfast",
-        "Contact" : "Contact"
+        "rooms" : "Rooms",
+        "breakfast" : "Breakfast",
+        "contact" : "Contact"
+      }
+    },
+    "menus" : {
+      "title" : "Your Morning Choices",
+      "classicBreakfast" : {
+        "title" : "Classic Breakfast",
+        "items" : [
+          "Eggs",
+          "Toast",
+          "Butter",
+          "Jam",
+          "Fresh Juice",
+          "Coffee/Tea"
+        ]
+      },
+      "continentalBreakfast" : {
+        "title" : "Continental Breakfast",
+        "items": [
+          "Croissant",
+          "Yogurt",
+          "Granola",
+          "Fruit",
+          "Fresh Juice",
+          "Coffee/Tea"
+        ]
       }
     }
   }

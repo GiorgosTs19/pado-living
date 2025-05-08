@@ -26,7 +26,7 @@ export function Pado() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
             viewport={{ amount: 0.35 }}
-            className={'w-full text-wrap'}
+            className={'w-full text-wrap xl:text-xl 2xl:text-2xl'}
           >
             {getTranslation('sections.pado.description')}
           </motion.pre>
@@ -40,19 +40,19 @@ export function Pado() {
             viewport={{ amount: 0.35 }}
           >
             <SectionLink
-              className={'block w-full border-e-2 hover'}
+              className={'block w-full border-e-2 hover xl:text-xl 2xl:text-2xl'}
               href={'#Rooms'}
-              text={getTranslation('sections.pado.buttons.Rooms')!}
+              text={getTranslation('sections.pado.buttons.rooms')!}
             />
             <SectionLink
-              className={'block w-full border-e-2  hover'}
+              className={'block w-full border-e-2 hover xl:text-xl 2xl:text-2xl'}
               href={'#Rooms'}
-              text={getTranslation('sections.pado.buttons.Breakfast')!}
+              text={getTranslation('sections.pado.buttons.breakfast')!}
             />
             <SectionLink
-              className={'block w-full hover'}
+              className={'block w-full hover xl:text-xl 2xl:text-2xl'}
               href={'#Rooms'}
-              text={getTranslation('sections.pado.buttons.Contact')!}
+              text={getTranslation('sections.pado.buttons.contact')!}
             />
           </motion.div>
         </div>

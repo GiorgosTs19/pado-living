@@ -5,6 +5,7 @@ import Room1 from '@/assets/images/Room_1.jpg';
 import Room2 from '@/assets/images/Room_2.jpg';
 import Room3 from '@/assets/images/Room_3.jpg';
 import Room4 from '@/assets/images/Room_4.jpg';
+import Room5 from '@/assets/images/Room_6.jpg';
 
 export function Gallery() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
@@ -28,7 +29,8 @@ export function Gallery() {
   }, [active]);
 
   return (
-    <section className={'px-[5%] py-10'} id={'Rooms'}>
+    <section className={'px-[5%] py-10 '} id={'Rooms'}>
+      <h2 className={'text-start text-3xl font-bold mb-10 ps-3 font-serif'}> {getTranslation(`sections.rooms.title`)}</h2>
       <AnimatePresence>
         {active && typeof active === 'object' && (
           <motion.div
@@ -41,7 +43,9 @@ export function Gallery() {
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === 'object' ? (
-          <div className="fixed inset-0 grid place-items-center z-[100]">
+          <div className="fixed inset-0 grid place-items-center z-[100] h-full w-full">
+            {/* Pseudo-element for blur */}
+            <div className="absolute inset-0 bg-fill bg-center blur-4xl z-[-1] bg-semiTransparent" ></div>
             <motion.button
               key={`button-${active.id}`}
               layout
@@ -57,26 +61,30 @@ export function Gallery() {
                   duration: 0.05,
                 },
               }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="flex absolute top-2 right-[5%] items-center justify-center bg-white rounded-full h-6 w-6 cursor-pointer"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
             </motion.button>
+
             <motion.div
               layoutId={`card-${active.id}`}
-              className="w-full max-w-[750px] h-vdh md:h-fit md:max-h-[90%] flex-col bg-transparent sm:rounded-3xl overflow-hidden flex items-center px-[5%]"
+              className="relative w-full h-vdh md:h-fit md:max-h-[90%] flex-col g-transparent sm:rounded-3xl overflow-hidden flex items-center px-[5%] gap-4 z-[101]"
             >
               <img
                 src={active.src}
                 alt={`${active.id}`}
-                className="w-full rounded-lg object-contain object-top"
+                className="w-full max-w-md lg:max-w-2xl 2xl:max-w-4xl rounded-lg object-contain object-top"
               />
+              <div className={'font-serif text-center text-lg xl:text-xl'}>
+                {getTranslation(`sections.rooms.${active.description}`)}
+              </div>
             </motion.div>
           </div>
         ) : null}
       </AnimatePresence>
       <ul
-        className={`max-w-2xl xl:max-w-full mx-auto w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 items-start gap-4 ${active ? 'blur-lg' : ''}`}
+        className={`mx-auto w-full flex flex-wrap items-center justify-center 2xl:justify-start gap-9 ${active ? '' : ''}`}
       >
         {cards.map((card) => (
           <motion.li
@@ -88,7 +96,7 @@ export function Gallery() {
             <div className="relative flex gap-4 flex-col w-full group">
               <div
                 className={
-                  'absolute w-full h-full flex items-center justify-center z-10 group-hover:hidden'
+                  'font-serif px-2 text-xs md:text-base lg:text-lg 2xl:text-2xl text-center font-bold italic absolute w-full h-full flex items-center justify-center z-10 group-hover:hidden'
                 }
               >
                 {getTranslation(`sections.rooms.${card.overlay}`)}
@@ -101,11 +109,9 @@ export function Gallery() {
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  width={100}
-                  height={100}
                   src={card.src}
                   alt={`${card.id}`}
-                  className="h-60 w-full rounded-lg object-cover object-top"
+                  className="h-20 sm:h-30 md:h-40 2xl:h-50 w-full rounded-lg object-cover object-top"
                 />
               </motion.div>
             </div>
@@ -149,26 +155,38 @@ export const CloseIcon = () => {
   );
 };
 
+
+
 const cards = [
   {
     id: 1,
     src: Room1,
-    overlay: 'View-1',
+    overlay: 'view-1',
+    description: 'description-1',
   },
   {
     id: 2,
     src: Room2,
-    overlay: 'View-2',
+    overlay: 'view-2',
+    description: 'description-2',
   },
 
   {
     id: 3,
     src: Room3,
-    overlay: 'View-3',
+    overlay: 'view-3',
+    description: 'Description-3',
   },
   {
     id: 4,
     src: Room4,
-    overlay: 'View-4',
+    overlay: 'view-4',
+    description: 'description-4',
+  },
+  {
+    id: 5,
+    src: Room5,
+    overlay: 'view-5',
+    description: 'description-5',
   },
 ];

@@ -1,4 +1,4 @@
-import { Gallery, Hero, Pado } from '@/components';
+import { Gallery, Hero, Menus, Pado } from '@/components';
 
 export function Homepage() {
   return (
@@ -6,6 +6,7 @@ export function Homepage() {
       <Hero />
       <Pado />
       <Gallery />
+      <Menus/>
     </>
   );
 }
