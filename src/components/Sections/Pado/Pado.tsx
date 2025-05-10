@@ -1,34 +1,28 @@
-import { motion } from 'framer-motion';
-import Room1 from '@/assets/images/Room_1.jpg';
-import { useLang } from '@/lang';
+import Room2 from '@/assets/images/Room_2.jpg';
+
 export function Pado() {
-  const { getTranslation } = useLang();
-
   return (
-    <section className="px-[5%] py-10 md:py-10 lg:py-24">
-      <div className="gap-x-20 gap-y-12 md:gap-y-16 lg:items-center">
-        <motion.pre
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-          viewport={{ amount: 0.35 }}
-          className={'w-full text-wrap xl:text-xl 2xl:text-2xl text-center font-serif'}
-        >
-          {getTranslation('sections.pado.description')}
-        </motion.pre>
+    <section className="relative w-full bg-gradient-to-b from-primary/10 to-white py-16 md:py-24">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+        {/* Text Content */}
+        <div className="flex flex-col gap-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-secondary leading-tight">Welcome to Pado Living</h1>
+          <p className="text-lg text-muted">
+            Just a short walk from the beach, our freshly renovated rooms offer comfort, calm, and convenience in the heart of Faliraki.
+          </p>
+        </div>
 
-        {/* Logo */}
-        <motion.img
-          initial={{ opacity: 0, y: '50%' }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 1.2 }}
-          width={100}
-          height={100}
-          src={Room1}
-          alt={`Room Card`}
-          className="h-full w-full rounded-lg object-cover object-top hidden lg:block"
-          viewport={{ amount: 0.35 }}
-        />
+        {/* Hero Image */}
+        <div className="w-full min-h-42 md:h-[400px] relative rounded-2xl overflow-hidden shadow-md">
+          <img src={Room2} alt={'Cozy Mediterranean Airbnb'} className={'object-cover object-center'} />
+          {/*<Image*/}
+          {/*  src={heroImage}*/}
+          {/*  alt="Cozy Mediterranean Airbnb"*/}
+          {/*  fill*/}
+          {/*  className="object-cover object-center"*/}
+          {/*  priority*/}
+          {/*/>*/}
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import Room2 from '@/assets/images/Room_2.jpg';
 import Room3 from '@/assets/images/Room_3.jpg';
 import Room4 from '@/assets/images/Room_4.jpg';
 import Room5 from '@/assets/images/Room_6.jpg';
@@ -8,27 +6,8 @@ import { GalleryCardType } from '@/types.ts';
 import { GalleryItem } from 'components/Sections/Gallery/GalleryItem.tsx';
 
 export function Gallery() {
-  const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
-
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setActive(false);
-      }
-    }
-
-    if (active && typeof active === 'object') {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [active]);
-
   return (
-    <section className={'w-full'} id={'Rooms'}>
+    <section className={'w-full border-t-4 border-border'} id={'Rooms'}>
       <div className="flex flex-col w-full">
         {cards.map(card => (
           <GalleryItem item={card} key={card.id} />
@@ -125,13 +104,6 @@ export const CloseIcon = () => {
 // </AnimatePresence>
 
 const cards: Array<GalleryCardType> = [
-  {
-    id: 1,
-    src: Room2,
-    title: 'title-2',
-    description: 'description-2',
-  },
-
   {
     id: 2,
     src: Room3,

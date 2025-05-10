@@ -15,23 +15,37 @@ export function Amenities() {
   );
 }
 
+const iconWrapperStyle = 'flex items-center justify-center h-10 w-10 border-2 border-border rounded-full';
+
 const cards = [
   {
     id: 1,
-    icon: <img src={Wifi} className={'h-8 md:h-14 lg:h-20'} alt={'Wifi'} />,
+    icon: (
+      <div className={iconWrapperStyle}>
+        <img src={Wifi} className="h-8 w-8" alt="Wifi" />
+      </div>
+    ),
     title: 'Free High-Speed Wi-Fi',
-    description: 'Stay connected anytime with fast, free internet throughout your stay.',
+    description: 'Free Wi-Fi',
   },
   {
     id: 2,
-    icon: <Parking className={'h-8 md:h-14 lg:h-20'} />,
+    icon: (
+      <div className={iconWrapperStyle}>
+        <Parking className="h-8 w-8" />
+      </div>
+    ),
     title: 'Private Parking',
-    description: 'Secure, private parking available for your convenience during your stay.',
+    description: 'Private parking',
   },
   {
     id: 4,
-    icon: <img src={Breakfast} className={'h-8 md:h-14 lg:h-20'} alt={'Breakfast'} />,
+    icon: (
+      <div className={iconWrapperStyle}>
+        <img src={Breakfast} className="h-8 w-8" alt="Breakfast" />
+      </div>
+    ),
     title: 'Breakfast Included',
-    description: 'Fresh local breakfast delivered daily with rotating menu options.',
+    description: 'Breakfast available',
   },
 ];
