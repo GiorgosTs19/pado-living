@@ -1,12 +1,13 @@
-import { Gallery, Hero, Menus, Pado } from '@/components';
+import { Gallery, Hero, Menus } from '@/components';
 
 export function Homepage() {
   return (
     <>
       <Hero />
-      <Pado />
+      {/*<Pado />*/}
+      {/*<Amenities />*/}
       <Gallery />
-      <Menus/>
+      <Menus />
     </>
   );
 }

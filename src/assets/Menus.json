@@ -1,0 +1,24 @@
+{
+  "A" : {
+    "title" : "Classic Breakfast",
+    "items" : [
+      "Eggs",
+      "Toast",
+      "Butter",
+      "Jam",
+      "Fresh Juice",
+      "Coffee/Tea"
+    ]
+  },
+  "B" : {
+    "title" : "Continental Breakfast",
+    "items": [
+      "Croissant",
+      "Yogurt",
+      "Granola",
+      "Fruit",
+      "Fresh Juice",
+      "Coffee/Tea"
+    ]
+  }
+}

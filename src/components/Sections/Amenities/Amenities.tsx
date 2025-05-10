@@ -1,26 +1,14 @@
-import {
-  MdOutlineBeachAccess,
-  MdOutlineBed,
-  MdOutlineFreeBreakfast,
-  MdOutlineLocalParking,
-} from 'react-icons/md';
+import { Parking } from '@/assets/icons/Parking.tsx';
+import Wifi from '@/assets/icons/wifi.svg';
+import Breakfast from '@/assets/icons/breakfast.svg';
 
 export function Amenities() {
   return (
-    <section
-      className={
-        'px-[5%] py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 w-full mx-auto'
-      }
-    >
-      {cards.map((card) => (
-        <div
-          key={card.id}
-          className={
-            'p-2 border-subtitle flex flex-col items-center justify-center gap-3 border-b-2 sm:border-b-0 sm:border-e-2 sm:nth-[2]:border-e-0 lg:nth-[2]:border-e-2 md:border-e-2 last:border-0'
-          }
-        >
-          <div className={'text-5xl text-secondary'}>{card.icon}</div>
-          <h3 className={'w-full text-center'}>{card.title}</h3>
+    <section className={'px-[5%] py-3 lg:py-10 grid grid-cols-3 gap-3 w-full mx-auto'}>
+      {cards.map(card => (
+        <div key={card.id} className={'p-2 border-subtitle flex flex-col items-center justify-center gap-y-[2rem] border-e-2 last:border-0'}>
+          {card.icon}
+          <h3 className={'w-full text-center font-serif text-xl max-w-md hidden md:block'}>{card.description}</h3>
         </div>
       ))}
     </section>
@@ -30,31 +18,20 @@ export function Amenities() {
 const cards = [
   {
     id: 1,
-    icon: <MdOutlineBeachAccess />,
-    title: 'Perfectly Located in Faliraki',
-    description:
-      'Just a short 8-minute walk from Faliraki Beach, Pado Living offers easy access to the sun and sea. Explore the area’s local attractions and enjoy a relaxing stay surrounded by natural beauty.',
+    icon: <img src={Wifi} className={'h-8 md:h-14 lg:h-20'} alt={'Wifi'} />,
+    title: 'Free High-Speed Wi-Fi',
+    description: 'Stay connected anytime with fast, free internet throughout your stay.',
   },
   {
     id: 2,
-    icon: <MdOutlineBed />,
-    title: 'Modern Amenities for Your Comfort',
-    description:
-      'Relax in air-conditioned rooms featuring a flat-screen TV, minibar, and private bathrooms. Some rooms offer balconies with garden or city views, creating a peaceful space to unwind.',
-  },
-
-  {
-    id: 3,
-    icon: <MdOutlineFreeBreakfast />,
-    title: 'Fresh Breakfast Every Morning',
-    description:
-      'Wake up to a delicious continental breakfast, prepared fresh daily. Start your morning right with a variety of tasty options to energize you for the day ahead.',
+    icon: <Parking className={'h-8 md:h-14 lg:h-20'} />,
+    title: 'Private Parking',
+    description: 'Secure, private parking available for your convenience during your stay.',
   },
   {
     id: 4,
-    icon: <MdOutlineLocalParking />,
-    title: 'Peaceful Garden & Free Parking',
-    description:
-      'Enjoy a tranquil garden setting and the convenience of free private parking during your stay. Whether relaxing outdoors or exploring the city, comfort is always at your doorstep.',
+    icon: <img src={Breakfast} className={'h-8 md:h-14 lg:h-20'} alt={'Breakfast'} />,
+    title: 'Breakfast Included',
+    description: 'Fresh local breakfast delivered daily with rotating menu options.',
   },
 ];

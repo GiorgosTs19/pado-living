@@ -13,25 +13,25 @@ html, body, #root {
 
 body {
   font-family: 'Inter', sans-serif; /* Use a valid font loaded in your HTML */
-  @apply min-h-dvh bg-[linear-gradient(to_bottom,_#EEECE7,_#E7E4DF)] shadow-inner shadow-[#ccc]/30;
-  @apply text-[#444] antialiased;
+  /*@apply min-h-dvh bg-[linear-gradient(to_bottom,_#EEECE7,_#E7E4DF)] shadow-inner shadow-[#ccc]/30;*/
+  /*@apply text-[#444] antialiased;*/
 }
 
 /* Background images */
 @layer utilities {
   .hero-bg {
-    background-image: url('/src/assets/images/HeroBackground-mobile.jpg');
+    background-image: url('/src/assets/images/Room_1.jpg');
   }
 
   @media (min-width: 640px) {
     .hero-bg {
-      background-image: url('/src/assets/images/HeroBackground-tablet.jpg');
+      background-image: url('/src/assets/images/Room_1.jpg');
     }
   }
 
   @media (min-width: 1024px) {
     .hero-bg {
-      background-image: url('/src/assets/images/HeroBackground-desktop.jpg');
+      background-image: url('/src/assets/images/Room_1.jpg');
     }
   }
 
@@ -79,18 +79,7 @@ body {
         background-position: center 5%;
       }
       to {
-        background-position: center 20%;
-      }
-    }
-  }
-
-  @media (min-width: 1024px) {
-    @keyframes bg-pan-down {
-      from {
-        background-position: center 85%;
-      }
-      to {
-        background-position: center 15%;
+        background-position: center 90%;
       }
     }
   }
