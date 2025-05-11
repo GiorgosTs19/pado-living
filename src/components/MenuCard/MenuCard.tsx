@@ -1,4 +1,6 @@
 import Menus from '@/assets/Menus.json';
+import Croissant from '@/assets/images/breakfast/croissant.png';
+import FriedEgg from '@/assets/images/breakfast/fried-egg.png';
 
 type MenuCardProps = {
   label: string;
@@ -11,12 +13,12 @@ const menus: Record<'A' | 'B', { title: string; items: string[]; imageSrc?: stri
   A: {
     title: Menus.A.title,
     items: Menus.A.items,
-    imageSrc: Menus.A.imageSrc,
+    imageSrc: FriedEgg,
   },
   B: {
     title: Menus.B.title,
     items: Menus.B.items,
-    imageSrc: Menus.B.imageSrc,
+    imageSrc: Croissant,
   },
 };
 

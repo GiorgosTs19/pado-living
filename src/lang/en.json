@@ -4,6 +4,39 @@
       "title" : "Pado Living",
       "description" : "Where your journey pauses, and ease begins."
     },
+    "pado" : {
+      "title": "Welcome to Pado Living",
+      "description" : "Just a short walk from the beach, our freshly renovated rooms offer comfort, calm, and convenience in the heart of Faliraki.",
+      "buttons": {
+        "rooms" : "Rooms",
+        "breakfast" : "Breakfast",
+        "contact" : "Contact"
+      }
+    },
+    "rules": {
+      "title" : "A Smooth Stay Starts Here",
+      "checkingSection" : {
+        "title" : "Check-in & Stay Info",
+        "checkInTime" : "Check-in: From 2:00 PM",
+        "checkOutTime" : "Check-out: By 11:00 AM",
+        "beforeLeaving" : "Before leaving, please ensure all windows and doors are closed and the front door is locked."
+      },
+      "contact": {
+        "title" : "Contact",
+        "message" : "For anything you need, message us on WhatsApp: 6947709090 – Sandy"
+      },
+      "wifiAccess": {
+        "title" : "Wi-Fi Access",
+        "userName" : {
+          "key": "Username",
+          "value": "my_username"
+        },
+        "password" : {
+          "key": "Password",
+          "value": "my_password"
+        }
+      }
+    },
     "rooms" : {
       "title": "A Look Inside",
       "title-1":"Bed & Balcony",
@@ -16,15 +49,6 @@
       "description-3":"Functional workspace paired with direct balcony access — ideal for work or relaxation.",
       "description-4":"Smart TV, air conditioning, and thoughtful touches ensure a comfortable and connected stay.",
       "description-5":"Clean, modern bathroom with a walk-in shower and all essential toiletries provided."
-    },
-    "pado" : {
-      "title": "Welcome to Pado Living",
-      "description" : "Just a short walk from the beach, our freshly renovated rooms offer comfort, calm, and convenience in the heart of Faliraki.",
-      "buttons": {
-        "rooms" : "Rooms",
-        "breakfast" : "Breakfast",
-        "contact" : "Contact"
-      }
     },
     "menus": {
       "title": "Your Morning Choices",

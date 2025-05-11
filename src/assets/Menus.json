@@ -1,6 +1,5 @@
 {
   "A" : {
-    "imageSrc" : "src/assets/images/breakfast/fried-egg.png",
     "title" : "Classic Breakfast",
     "items" : [
       "Eggs",
@@ -12,7 +11,6 @@
     ]
   },
   "B" : {
-    "imageSrc" : "src/assets/images/breakfast/croissant.png",
     "title" : "Continental Breakfast",
     "items": [
       "Croissant",

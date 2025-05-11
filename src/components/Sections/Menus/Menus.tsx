@@ -5,9 +5,7 @@ import { MenuCard } from 'components/MenuCard';
 export function Menus() {
   const { getTranslation } = useLang();
 
-  const { isOrderingOpen: canOrder, cutoffTime, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
-
-  console.log(canOrder, cutoffTime, remainingTime, tomorrowMenu, todayMenu, nextAvailableDay);
+  const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
 
   return (
     <section className={'px-[5%] py-10'} id={'Breakfast'}>

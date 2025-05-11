@@ -6,6 +6,7 @@ import { FiCoffee, FiMail } from 'react-icons/fi';
 import { FaLocationDot } from 'react-icons/fa6';
 import { useModal } from '@/hooks';
 import { FaTaxi } from 'react-icons/fa';
+import { TiInfoLargeOutline } from 'react-icons/ti';
 
 export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desktopClassName?: string; mobileClassName?: string }) => {
   const { setOpen } = useModal();
@@ -14,9 +15,10 @@ export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desk
 
   const items = useMemo(
     () => [
+      { title: 'Checking In / Out', icon: <TiInfoLargeOutline className={'text-2xl text-secondary'} />, href: '#Rules' },
       { title: 'Breakfast', icon: <FiCoffee className={'text-lg text-secondary'} />, href: '#Breakfast' },
-      { title: 'Location', icon: <FaLocationDot className={'text-lg text-secondary'} />, href: '#Location' },
       { title: 'Contact', icon: <FiMail className={'text-md text-secondary'} />, href: '#Contact' },
+      { title: 'Location', icon: <FaLocationDot className={'text-lg text-secondary'} />, href: '#Location' },
       { title: 'Taxi', icon: <FaTaxi className={'text-md text-secondary'} />, action: openTaxiModal },
     ],
     [openTaxiModal]
@@ -104,7 +106,7 @@ const FloatingDockDesktop = ({
       onMouseMove={e => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        'fixed top-10 left-[50%] -translate-x-1/2 min-w-md mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-chill px-4 pb-3 md:flex dark:bg-neutral-900',
+        'fixed top-10 left-[50%] -translate-x-1/2 min-w-md mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-chill px-4 pb-3 md:flex justify-between',
         className
       )}
     >

@@ -29,7 +29,7 @@ export function Location() {
         <div className="flex flex-col gap-y-3 text-sm md:text-base text-secondary">
           <h3 className="font-semibold mb-1">{getTranslation('sections.location.taxi.title')}</h3>
           <button
-            className="w-36 max-w-md rounded-xl bg-primary text-secondary text-sm md:text-base font-medium py-2 hover:bg-subtitle transition cursor-pointe "
+            className="cursor-pointer w-36 max-w-md rounded-xl bg-primary text-secondary text-sm md:text-base font-medium py-2 hover:bg-subtitle transition cursor-pointe "
             onClick={() => setOpen(true)}
             aria-label="Call a Taxi Modal"
           >

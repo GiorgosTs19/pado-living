@@ -1,4 +1,5 @@
 import { Gallery, Hero, Location, Menus, Pado, TaxiModal } from '@/components';
+import { CheckingInOut } from 'components/Sections/CheckingInOut';
 
 export function Homepage() {
   return (
@@ -6,7 +7,7 @@ export function Homepage() {
       <Hero />
       <Pado />
       <Gallery />
-      {/*<Amenities />*/}
+      <CheckingInOut />
       <Menus />
       <Location />
       <TaxiModal />
