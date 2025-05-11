@@ -1,4 +1,4 @@
-import { Gallery, Hero, Menus, Pado } from '@/components';
+import { Gallery, Hero, Location, Menus, Pado, TaxiModal } from '@/components';
 
 export function Homepage() {
   return (
@@ -8,6 +8,8 @@ export function Homepage() {
       <Gallery />
       {/*<Amenities />*/}
       <Menus />
+      <Location />
+      <TaxiModal />
     </>
   );
 }

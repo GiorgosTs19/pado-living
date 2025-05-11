@@ -18,15 +18,41 @@
       "description-5":"Clean, modern bathroom with a walk-in shower and all essential toiletries provided."
     },
     "pado" : {
-      "description" : "Just 8 minutes from Faliraki Beach, Pado Living offers a quiet, comfortable stay surrounded by greenery. A simple retreat close to everything you need.",
+      "title": "Welcome to Pado Living",
+      "description" : "Just a short walk from the beach, our freshly renovated rooms offer comfort, calm, and convenience in the heart of Faliraki.",
       "buttons": {
         "rooms" : "Rooms",
         "breakfast" : "Breakfast",
         "contact" : "Contact"
       }
     },
-    "menus" : {
-      "title" : "Your Morning Choices"
+    "menus": {
+      "title": "Your Morning Choices",
+      "rules": {
+        "orderCutoff": "To ensure everything is fresh and ready on time, please take a moment to review the following breakfast guidelines.",
+        "cutoffTime": "Orders must be placed <strong>by 8:00 PM</strong> for the following day.",
+        "rotation": "We alternate between <strong>two predefined menu cards</strong> on an every-other-day basis. Each day brings a different delicious option!",
+        "packaging": "Breakfast will be delivered in a <strong>sealed, eco-friendly paper box</strong> to maintain freshness and hygiene.",
+        "thanks": "Thank you for your cooperation and enjoy your breakfast!"
+      },
+      "orderNow": "Order Now",
+      "orderWithin": "Order within {{time}}",
+      "notAvailable": "Not available for order"
+    },
+  "location": {
+    "taxi": {
+      "callTaxi" : "Call a Taxi",
+      "modalDescription": "We recommend trusted local drivers to help you get around quickly and safely",
+      "title": "Need a taxi?",
+      "vasilis": {
+        "name": "Vasilis",
+        "phone" : "+30 694 371 4103"
+      },
+      "thomas": {
+        "name": "Thomas",
+        "phone" : "+30 693 665 6126"
+      }
     }
+  }
   }
 }
