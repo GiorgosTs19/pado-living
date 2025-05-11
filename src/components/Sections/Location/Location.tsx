@@ -1,5 +1,5 @@
-import Pharmacy from '@/assets/icons/pharmacy.svg';
-import Groceries from '@/assets/icons/groceries.svg';
+// import Pharmacy from '@/assets/icons/pharmacy.svg';
+// import Groceries from '@/assets/icons/groceries.svg';
 import { useLang } from '@/lang';
 import { useModal } from '@/hooks';
 
@@ -10,7 +10,7 @@ export function Location() {
   return (
     <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 mt-20 px-4 md:px-[5%] py-16 w-full border-y-4 border-border">
       {/* Info Column */}
-      <div className="relative z-10 backdrop-blur-xl p-10 space-y-8">
+      <div className="relative backdrop-blur-xl p-10 space-y-8">
         <header>
           <h2 className="text-4xl font-serif font-bold text-secondary mb-2">How to Find Us</h2>
           <p className="text-base text-chill">Kallithea Av 17, Faliraki, Rhodes</p>
@@ -50,24 +50,24 @@ export function Location() {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-        <div className={'absolute top-5 right-3 z-30 flex flex-col gap-2'}>
-          <a
-            href="https://maps.app.goo.gl/uPXqnkFvDFs59uL69"
-            target="_blank"
-            rel="noopener noreferrer"
-            className=" rounded-xl text-secondary p-1 font-medium border-2 border-border transition"
-          >
-            <img src={Pharmacy} alt={'Pharmacy'} className={'h-6 w-6 md:h-10 md:w-10'} />
-          </a>
-          <a
-            href="https://maps.app.goo.gl/ARGzPF4JKfstA7tcA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-xl text-secondary p-1 font-medium border-2 border-border transition"
-          >
-            <img src={Groceries} alt={'Groceries'} className={'h-6 w-6 md:h-10 md:w-10'} />
-          </a>
-        </div>
+        {/*<div className={'absolute top-5 right-3 z-30 flex flex-col gap-2'}>*/}
+        {/*  <a*/}
+        {/*    href="https://maps.app.goo.gl/uPXqnkFvDFs59uL69"*/}
+        {/*    target="_blank"*/}
+        {/*    rel="noopener noreferrer"*/}
+        {/*    className=" rounded-xl text-secondary p-1 font-medium border-2 border-border transition"*/}
+        {/*  >*/}
+        {/*    <img src={Pharmacy} alt={'Pharmacy'} className={'h-6 w-6 md:h-10 md:w-10'} />*/}
+        {/*  </a>*/}
+        {/*  <a*/}
+        {/*    href="https://maps.app.goo.gl/ARGzPF4JKfstA7tcA"*/}
+        {/*    target="_blank"*/}
+        {/*    rel="noopener noreferrer"*/}
+        {/*    className="rounded-xl text-secondary p-1 font-medium border-2 border-border transition"*/}
+        {/*  >*/}
+        {/*    <img src={Groceries} alt={'Groceries'} className={'h-6 w-6 md:h-10 md:w-10'} />*/}
+        {/*  </a>*/}
+        {/*</div>*/}
       </div>
     </section>
   );

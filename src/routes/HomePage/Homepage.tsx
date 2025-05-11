@@ -4,7 +4,7 @@ import { CheckingInOut } from 'components/Sections/CheckingInOut';
 export function Homepage() {
   return (
     <>
-      <Hero />
+      {/*<Hero />*/}
       <Pado />
       <Gallery />
       <CheckingInOut />

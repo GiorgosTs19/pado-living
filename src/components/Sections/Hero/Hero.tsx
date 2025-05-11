@@ -4,7 +4,7 @@ export function Hero() {
   const { getTranslation } = useLang();
 
   return (
-    <section className="relative  hero-bg bg-cover bg-center min-h-dvh w-full flex flex-col items-center justify-center text-secondary">
+    <section className="relative min-h-dvh w-full flex flex-col items-center justify-center text-secondary">
       {/* Dark overlay with blur */}
       <div className="absolute inset-0 bg-secondary/30 backdrop-blur-xs z-0 border-b-4 border-border" />
 
