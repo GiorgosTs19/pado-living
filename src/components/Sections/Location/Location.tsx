@@ -8,9 +8,9 @@ export function Location() {
   const { setOpen } = useModal();
 
   return (
-    <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 mt-20 px-4 md:px-[5%] py-16 w-full border-y-4 border-border">
+    <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 mt-20 px-4 md:px-[5%] py-16 w-full border-t-4 border-border">
       {/* Info Column */}
-      <div className="relative backdrop-blur-xl p-10 space-y-8">
+      <div className="relative backdrop-blur-xl space-y-8">
         <header>
           <h2 className="text-4xl font-serif font-bold text-secondary mb-2">How to Find Us</h2>
           <p className="text-base text-chill">Kallithea Av 17, Faliraki, Rhodes</p>

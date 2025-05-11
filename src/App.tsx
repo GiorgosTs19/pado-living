@@ -5,7 +5,7 @@ import { FloatingNavigation } from '@/components';
 
 function App() {
   return (
-    <main className={'pb-5'}>
+    <main className={'pb-[5rem]'}>
       <Routes>
         {ROUTES.map(route => (
           <Route key={route.path} path={route.path} element={route.element} />
