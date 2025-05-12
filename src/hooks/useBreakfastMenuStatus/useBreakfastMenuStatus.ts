@@ -1,60 +1,69 @@
-import { useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const CUTOFF_HOUR = 20;
+const INTERVAL_MS = 60_000;
 
-function getMenuForDate(date: Date): 'A' | 'B' {
-  const day = date.getDate(); // 1–31
-  return day % 2 === 0 ? 'A' : 'B'; // Even = A, Odd = B
+function getCutoffFor(date: Date): Date {
+  const cut = new Date(date);
+  cut.setHours(CUTOFF_HOUR, 0, 0, 0);
+  return cut;
 }
 
-function getTomorrow(): Date {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow;
+function offsetDays(base: Date, days: number): Date {
+  const d = new Date(base);
+  d.setDate(d.getDate() + days);
+  return d;
 }
 
-function getTodayCutoff(): Date {
-  const cutoff = new Date();
-  cutoff.setHours(CUTOFF_HOUR, 0, 0, 0);
-  return cutoff;
-}
-
-function getRemainingTimeUntil(date: Date): string {
-  const now = new Date();
-  const diffMs = date.getTime() - now.getTime();
-  if (diffMs <= 0) return '0h 0m';
-
-  const totalMinutes = Math.floor(diffMs / 60000);
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-  return `${hours}h ${minutes}m`;
+function formatRemaining(ms: number): string {
+  if (ms <= 0) return '0h 0m';
+  const totalMins = Math.floor(ms / 60_000);
+  return `${Math.floor(totalMins / 60)}h ${totalMins % 60}m`;
 }
 
 export function useBreakfastMenuStatus() {
-  const now = new Date();
-  const today = new Date();
-  const tomorrow = getTomorrow();
-  const cutoffTime = getTodayCutoff();
+  // 1) keep “now” ticking every minute
+  const [now, setNow] = useState(() => new Date());
 
-  const todayMenu = getMenuForDate(today);
-  const tomorrowMenu = getMenuForDate(tomorrow);
-  const canOrder = now.getTime() < cutoffTime.getTime();
-  const nextAvailableDay = tomorrow.toLocaleDateString(undefined, {
-    weekday: 'long',
-  });
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), INTERVAL_MS);
+    return () => clearInterval(id);
+  }, []);
 
-  const remainingTime = getRemainingTimeUntil(cutoffTime);
+  // 2) compute today’s cutoff and tomorrow’s cutoff
+  const todayCutoff = useMemo(() => getCutoffFor(now), [now]);
+  const tomorrowCutoff = useMemo(() => getCutoffFor(offsetDays(now, 1)), [now]);
 
-  return useMemo(
-    () => ({
-      isOrderingOpen: canOrder,
-      cutoffTime,
-      remainingTime,
-      availableMenu: tomorrowMenu,
-      todayMenu,
-      canOrder,
-      nextAvailableDay,
+  // 3) pick the “next cutoff” based on current time
+  const beforeCutoff = now < todayCutoff;
+  const nextCutoff = beforeCutoff ? todayCutoff : tomorrowCutoff;
+
+  // 4) compute remaining time until that cutoff
+  const remainingTime = useMemo(() => formatRemaining(nextCutoff.getTime() - now.getTime()), [now, nextCutoff]);
+
+  // 5) determine which day you can order for:
+  //    – before cutoff → tomorrow
+  //    – after cutoff → day after tomorrow
+  const daysAhead = beforeCutoff ? 1 : 2;
+  const nextDate = useMemo(() => offsetDays(now, daysAhead), [now, daysAhead]);
+
+  // 6) menus
+  const todayMenu = useMemo(() => getMenuForDate(now), [now]);
+  const availableMenu = useMemo(() => getMenuForDate(nextDate), [nextDate]);
+
+  return {
+    isOrderingOpen: beforeCutoff,
+    cutoffTime: nextCutoff,
+    remainingTime,
+    todayMenu,
+    availableMenu,
+    nextAvailableDay: nextDate.toLocaleDateString(undefined, {
+      weekday: 'long',
     }),
-    [canOrder, cutoffTime, remainingTime, tomorrowMenu, todayMenu, nextAvailableDay]
-  );
+  };
+}
+
+// helper (unchanged)
+function getMenuForDate(date: Date): 'A' | 'B' {
+  return date.getDate() % 2 === 0 ? 'A' : 'B';
 }

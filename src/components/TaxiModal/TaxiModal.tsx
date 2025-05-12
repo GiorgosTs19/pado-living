@@ -8,7 +8,6 @@ import { useModal } from '@/hooks';
 export function TaxiModal() {
   const { getTranslation } = useLang();
   const { open, setOpen } = useModal();
-  console.log(open);
 
   return (
     <AnimatePresence>

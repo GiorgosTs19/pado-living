@@ -8,10 +8,10 @@ export function Menus() {
   const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
 
   return (
-    <section className={'px-[5%] py-10'} id={'Breakfast'}>
+    <section className={'px-[5%] py-10 bg-primary/60'} id={'Breakfast'}>
       <h2 className={'text-start text-4xl font-bold mb-10 ps-3 '}> {getTranslation(`sections.menus.title`)}</h2>
 
-      <div className="grid md:grid-cols-2 gap-8 ">
+      <div className="grid lg:grid-cols-2 gap-8 ">
         <div className="text-base md:text-lg lg:text-xl text-secondary flex flex-col justify-center bg-white rounded-2xl shadow-md">
           <div className="p-6 md:p-8 lg:px-10">
             <p className="mb-3">{getTranslation('sections.menus.rules.orderCutoff')}</p>
