@@ -8,7 +8,7 @@ export function Location() {
   const { setOpen } = useModal();
 
   return (
-    <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 px-4 md:px-[5%] py-16 w-full border-t-4 border-border">
+    <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 px-4 md:px-[5%] py-16 w-full">
       {/* Info Column */}
       <div className="relative backdrop-blur-xl space-y-8">
         <header>

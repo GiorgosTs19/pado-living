@@ -4,3 +4,4 @@ export * from './Gallery';
 export * from './Pado';
 export * from './Menus';
 export * from './Location';
+export * from './Rules';

@@ -1,4 +1,4 @@
-import { Gallery, Location, Menus, Pado, TaxiModal } from '@/components';
+import { BreakfastSection, Gallery, Location, Pado, Rules, TaxiModal } from '@/components';
 import { CheckingInOut } from 'components/Sections/CheckingInOut';
 
 export function Homepage() {
@@ -7,7 +7,8 @@ export function Homepage() {
       <Pado />
       <Gallery />
       <CheckingInOut />
-      <Menus />
+      <BreakfastSection />
+      <Rules />
       <Location />
       <TaxiModal />
     </>
