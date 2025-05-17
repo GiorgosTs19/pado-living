@@ -40,7 +40,7 @@ export function Menus() {
   );
 }
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Input } from '@/components/Input';
 import { Textarea } from '@/components/TextArea';
 
@@ -61,13 +61,14 @@ export const BreakfastSection = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // const handleDietaryChange = (checked: boolean) => {
-  //   setFormData(prev => ({
-  //     ...prev,
-  //     dietaryRestrictions: checked,
-  //     restrictions: !checked ? '' : prev.restrictions,
-  //   }));
-  // };
+  const handleDietaryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setFormData(prev => ({
+      ...prev,
+      dietaryRestrictions: checked,
+      restrictions: !checked ? '' : prev.restrictions,
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,62 +119,64 @@ export const BreakfastSection = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="email">Name</label>
-                    <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+                    <input
+                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      type="text"
+                      placeholder="Jane Doe"
+                      aria-label="Full name"
+                      id="name"
+                      name="name"
+                    />
+                    {/*<Input id="name" name="name" value={formData.name} onChange={handleChange} required />*/}
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="email">Email</label>
-                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                    <label htmlFor="guests">Number of Guests</label>
+                    <select
+                      id="guests"
+                      name="guests"
+                      value={formData.guests}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-b-[1px] border-b-border p-1"
+                      required
+                    >
+                      {[1, 2, 3, 4, 5, 6].map(num => (
+                        <option key={num} value={num}>
+                          {num}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="date">Date</label>
-                    <Input id="date" name="date" type="date" value={formData.date} onChange={handleChange} required />
+                    <input
+                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      type="date"
+                      placeholder="Jane Doe"
+                      aria-label="Full name"
+                      id="date"
+                      name="date"
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <label htmlFor="time">Time</label>
-                    <select
+                    <input
+                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      type="time"
+                      placeholder="Jane Doe"
+                      aria-label="Full name"
                       id="time"
                       name="time"
-                      value={formData.time}
-                      onChange={handleChange}
-                      className="w-full border border-input rounded-md h-10 px-3"
-                      required
-                    >
-                      <option value="7:00">7:00 AM</option>
-                      <option value="7:30">7:30 AM</option>
-                      <option value="8:00">8:00 AM</option>
-                      <option value="8:30">8:30 AM</option>
-                      <option value="9:00">9:00 AM</option>
-                      <option value="9:30">9:30 AM</option>
-                      <option value="10:00">10:00 AM</option>
-                    </select>
+                    />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="guests">Number of Guests</label>
-                  <select
-                    id="guests"
-                    name="guests"
-                    value={formData.guests}
-                    onChange={handleChange}
-                    className="w-full border border-input rounded-md h-10 px-3"
-                    required
-                  >
-                    {[1, 2, 3, 4, 5, 6].map(num => (
-                      <option key={num} value={num}>
-                        {num}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
                 <div className="flex items-center space-x-2">
-                  <input type={'checkbox'} id="dietary" checked={formData.dietaryRestrictions} />
+                  <input type={'checkbox'} id="dietary" checked={formData.dietaryRestrictions} onChange={handleDietaryChange} />
                   <label htmlFor="dietary" className="font-normal">
                     I have dietary restrictions
                   </label>
@@ -192,7 +195,7 @@ export const BreakfastSection = () => {
                   </div>
                 )}
 
-                <button type="submit" className="bg-primary hover:bg-primary/80">
+                <button type="submit" className="bg-primary hover:bg-primary/80 text-gray-800 font-semibold py-2 px-4 rounded shadow cursor-pointer">
                   Submit Breakfast Request
                 </button>
               </form>

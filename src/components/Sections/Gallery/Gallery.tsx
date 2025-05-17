@@ -7,7 +7,7 @@ import { GalleryItem } from 'components/Sections/Gallery/GalleryItem.tsx';
 
 export function Gallery() {
   return (
-    <section className={'w-full border-t-4 border-border'} id={'Rooms'}>
+    <section className={'w-full'} id={'Rooms'}>
       <div className="flex flex-col w-full">
         {cards.map(card => (
           <GalleryItem item={card} key={card.id} />
