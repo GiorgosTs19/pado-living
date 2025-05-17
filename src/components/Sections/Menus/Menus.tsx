@@ -41,7 +41,6 @@ export function Menus() {
 }
 
 import { ChangeEvent, useState } from 'react';
-import { Input } from '@/components/Input';
 import { Textarea } from '@/components/TextArea';
 
 export const BreakfastSection = () => {
