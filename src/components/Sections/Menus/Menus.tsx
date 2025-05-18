@@ -40,11 +40,15 @@ export function Menus() {
   );
 }
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Textarea } from '@/components/TextArea';
+import { CiForkAndKnife } from 'react-icons/ci';
 
 export const BreakfastSection = () => {
   const { getTranslation } = useLang();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -54,6 +58,18 @@ export const BreakfastSection = () => {
     dietaryRestrictions: false,
     restrictions: '',
   });
+
+  const [inputFocused, setInputFocused] = useState(false);
+
+  useEffect(() => {
+    if (inputFocused) {
+      const timeout = setTimeout(() => setInputFocused(false), 3000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [inputFocused]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -69,7 +85,7 @@ export const BreakfastSection = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     // toast({
     //   title: 'Breakfast Request Submitted',
@@ -77,49 +93,46 @@ export const BreakfastSection = () => {
     // });
   };
 
+  const onOrder = useCallback(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <section id="breakfast" className="px-[5%] py-20">
       <div className="container mx-auto">
         <h2 className={'text-center text-4xl font-bold mb-5'}>{getTranslation(`sections.menus.title`)}</h2>
 
-        {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">*/}
-        {/*{breakfastOptions.map(option => (*/}
-        {/*  <Card*/}
-        {/*    key={option.id}*/}
-        {/*    className={`overflow-hidden transition-all hover:shadow-md ${breakfastType === option.id ? 'ring-2 ring-primary' : ''}`}*/}
-        {/*  >*/}
-        {/*    <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${option.image})` }} />*/}
-        {/*    <CardContent className="p-5">*/}
-        {/*      <div className="flex items-center justify-between mb-2">*/}
-        {/*        <h3 className="font-semibold text-lg">{option.name}</h3>*/}
-        {/*        <span className="text-sm font-medium text-primary">{option.price}</span>*/}
-        {/*      </div>*/}
-        {/*      <p className="text-muted-foreground text-sm mb-4">{option.description}</p>*/}
-        {/*      <Button*/}
-        {/*        variant={breakfastType === option.id ? 'default' : 'outline'}*/}
-        {/*        className={breakfastType === option.id ? 'bg-primary hover:bg-primary/80' : ''}*/}
-        {/*        onClick={() => setBreakfastType(option.id)}*/}
-        {/*      >*/}
-        {/*        Select*/}
-        {/*      </Button>*/}
-        {/*    </CardContent>*/}
-        {/*  </Card>*/}
-        {/*))}*/}
-        {/*</div>*/}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <MenuCard
+            label={`Order for ${nextAvailableDay}`}
+            menuId={tomorrowMenu}
+            isOrderable={canOrder}
+            remainingTime={remainingTime}
+            onOrder={onOrder}
+          />
+          <MenuCard label="Served Today" menuId={todayMenu} isOrderable={false} />
+        </div>
 
         <div className=" p-6 md:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
+                <CiForkAndKnife className={'text-secondary text-4xl'} />
                 <h3 className="text-2xl font-semibold">Request Breakfast</h3>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label htmlFor="email">Name</label>
+                    <label htmlFor="name" className={`${inputFocused ? 'text-xl transition-all' : ''}`}>
+                      Name
+                    </label>
                     <input
-                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                      ref={inputRef}
+                      onFocus={() => {
+                        setInputFocused(true);
+                      }}
+                      className={`appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none`}
                       type="text"
                       placeholder="Jane Doe"
                       aria-label="Full name"
@@ -223,9 +236,9 @@ export const BreakfastSection = () => {
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Continental breakfast is included with your stay.</span>
+                  <span dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.cutoffTime')! }} />
                 </li>
                 <li className="flex items-start gap-2">
                   <svg
@@ -251,39 +264,10 @@ export const BreakfastSection = () => {
                   </svg>
                   <span>Special dietary requirements can be accommodated with advance notice.</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>Additional breakfast options have an extra charge as indicated.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Breakfast can be served in our dining area or on the terrace.</span>
-                </li>
               </ul>
 
-              <div className="mt-6 p-4 bg-primary/10 rounded-lg">
-                <h4 className="font-medium text-primary mb-2">Good to know</h4>
+              <div className="mt-6 p-4 bg-primary/60 rounded-lg">
+                <h4 className="font-medium text-secondary mb-2">Good to know</h4>
                 <p className="text-sm text-gray-700">
                   We source our ingredients locally for freshness and support of local businesses. Our eggs come from a nearby farm, our bread is
                   baked fresh each morning, and our fruits are seasonal and locally sourced when possible.
