@@ -89,7 +89,7 @@ const nearbyPlaces: NearbyPlace[] = [
     name: 'Faliraki Beach',
     type: 'Beach',
     distance: '~ 350m',
-    description: 'Our villa has direct access to this beautiful sandy beach.',
+    description: 'Our rooms have direct access to this beautiful sandy beach.',
     route: 'https://maps.app.goo.gl/oeTNcGpjvjmFwjyD7',
   },
   {
