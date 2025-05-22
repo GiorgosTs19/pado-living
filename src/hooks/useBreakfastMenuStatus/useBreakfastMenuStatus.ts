@@ -21,7 +21,16 @@ function formatRemaining(ms: number): string {
   return `${Math.floor(totalMins / 60)}h ${totalMins % 60}m`;
 }
 
-export function useBreakfastMenuStatus() {
+type BreakfastMenuStatus = {
+  isOrderingOpen: boolean;
+  cutoffTime: Date;
+  remainingTime: string;
+  todayMenu: 'A' | 'B';
+  availableMenu: 'A' | 'B';
+  nextAvailableDay: string;
+};
+
+export function useBreakfastMenuStatus(): BreakfastMenuStatus {
   // 1) keep “now” ticking every minute
   const [now, setNow] = useState(() => new Date());
 

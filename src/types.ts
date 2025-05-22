@@ -1,6 +1,6 @@
 export type GalleryCardType = {
-  id:number;
-  title:string;
-  src:string;
-  description:string;
-}
+  id: number;
+  title: string;
+  src: string;
+  description: string;
+};

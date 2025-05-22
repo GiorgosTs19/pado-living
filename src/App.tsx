@@ -6,12 +6,12 @@ import { FloatingNavigation } from '@/components';
 function App() {
   return (
     <main className={'pb-[5rem]'}>
+      <FloatingNavigation />
       <Routes>
         {ROUTES.map(route => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
       </Routes>
-      <FloatingNavigation />
     </main>
   );
 }

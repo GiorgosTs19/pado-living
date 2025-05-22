@@ -15,12 +15,26 @@
     },
     "rules": {
       "title" : "A Smooth Stay Starts Here",
-      "checkingSection" : {
-        "title" : "Check-in & Stay Info",
-        "checkInTime" : "Check-in: From 2:00 PM",
-        "checkOutTime" : "Check-out: By 11:00 AM",
-        "beforeLeaving" : "Before leaving, please ensure all windows and doors are closed and the front door is locked."
-      },
+        "checkin": {
+          "title": "Check-in",
+          "standardTime": "Standard time: After 02:00 PM",
+          "keypad": "Self check-in available with keypad",
+          "earlyRequest": "Early check-in may be available upon request"
+        },
+
+        "checkout": {
+          "title": "Check-out",
+          "standardTime": "Standard time: By 11:00 AM",
+          "lockedDoor": "Make sure the front door is locked!",
+          "lightsOff": "Please turn off all lights and lock the doors"
+        },
+
+        "note": {
+          "title": "Important Note",
+          "content1": "If you need to check in outside of the standard hours, please let us know at least 24 hours in advance so we can make arrangements for your arrival. For check-out, we can store your luggage if you have a later flight or plans for the day.",
+          "content2": "All times are based on local time in Greece (GMT+3)"
+        }
+      ,
       "contact": {
         "title" : "Contact",
         "message" : "For anything you need, message us on WhatsApp: 6947709090 – Sandy"
@@ -38,7 +52,7 @@
       }
     },
     "rooms" : {
-      "title": "A Look Inside",
+      "title": "Explore Our Rooms",
       "title-1":"Bed & Balcony",
       "title-2":"Cozy Bedside Angle",
       "title-3":"Balcony Access",
@@ -50,14 +64,42 @@
       "description-4":"Smart TV, air conditioning, and thoughtful touches ensure a comfortable and connected stay.",
       "description-5":"Clean, modern bathroom with a walk-in shower and all essential toiletries provided."
     },
+    "stayInformation" : {
+      "title" : "Stay Information",
+      "noSmoking" : {
+        "title" : "No smoking",
+        "description": "No smoking or vaping indoors."
+      },
+      "noParties" : {
+        "title": "No parties or events",
+        "description": "No parties or drug use allowed."
+      },
+      "quietHours" : {
+        "title" : "Quiet hours",
+        "description" : "Keep noise low, especially at night."
+      },
+      "pets" : {
+        "title" : "Pets policy",
+        "description" : "No pets are allowed."
+      },
+      "tidyDeparture" : {
+        "title": "Tidy departure",
+        "description" : "Trash is collected daily. Clear bins at checkout."
+      },
+      "ecoFriendly" : {
+        "title" : "Eco-friendly stay",
+        "description" : "Turn off lights and reuse towels when possible."
+      }
+    },
     "menus": {
       "title": "Your Morning Choices",
       "rules": {
         "orderCutoff": "To ensure everything is fresh and ready on time, please take a moment to review the following breakfast guidelines.",
         "cutoffTime": "Orders must be placed <strong>by 8:00 PM</strong> for the following day.",
-        "rotation": "We alternate between <strong>two predefined menu cards</strong> on an every-other-day basis. Each day brings a different delicious option!",
         "packaging": "Breakfast will be delivered in a <strong>sealed, eco-friendly paper box</strong> to maintain freshness and hygiene.",
-        "thanks": "Thank you for your cooperation and enjoy your breakfast!"
+        "thanks": "Thank you for your cooperation and enjoy your breakfast!",
+        "dietaryRestrictions": "Special dietary requirements can be accommodated with advance notice.",
+        "goodToKnow" : "We source our ingredients locally for freshness and support of local businesses. Our eggs come from a nearby farm, our bread is baked\n            fresh each morning, and our fruits are seasonal and locally sourced when possible."
       },
       "orderNow": "Order Now",
       "orderWithin": "Order within {{time}}",

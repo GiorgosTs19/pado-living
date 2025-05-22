@@ -1,48 +1,49 @@
 import { useLang } from '@/lang';
 import { useBreakfastMenuStatus } from '@/hooks';
 import { MenuCard } from 'components/MenuCard';
-
-export function Menus() {
-  const { getTranslation } = useLang();
-
-  const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
-
-  return (
-    <section className={'px-[5%] py-20 bg-primary/60'} id={'Breakfast'}>
-      <h2 className={'text-start text-4xl font-bold mb-10 ps-3 '}> {getTranslation(`sections.menus.title`)}</h2>
-
-      <div className="grid lg:grid-cols-2 gap-8 ">
-        <div className="text-base md:text-lg lg:text-xl text-secondary flex flex-col justify-center bg-white rounded-2xl shadow-md">
-          <div className="p-6 md:p-8 lg:px-10">
-            <p className="mb-3">{getTranslation('sections.menus.rules.orderCutoff')}</p>
-            <p dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.cutoffTime')! }} />
-          </div>
-
-          <div className="p-6 md:p-8 lg:px-10 pt-0">
-            <p dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.rotation')! }} />
-          </div>
-
-          <div className="p-6 md:p-8 lg:px-10 pt-0">
-            <p dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.packaging')! }} />
-          </div>
-
-          <div className="p-6 md:p-8 lg:px-10 pt-0">
-            <p>{getTranslation('sections.menus.rules.thanks')}</p>
-          </div>
-        </div>
-
-        <div className={'flex flex-col justify-between gap-10'}>
-          <MenuCard label={`Order for ${nextAvailableDay}`} menuId={tomorrowMenu} isOrderable={canOrder} remainingTime={remainingTime} />
-          <MenuCard label="Served Today" menuId={todayMenu} isOrderable={false} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Textarea } from '@/components/TextArea';
 import { CiForkAndKnife } from 'react-icons/ci';
+import { Section, SectionHeader } from 'components/Section';
+import { EARLIEST_BREAKFAST_SERVING_TIME, LATEST_BREAKFAST_SERVING_TIME, menus } from '@/constants.ts';
+import { TimeInput } from 'components/TimeInput';
+import { motion, Variants } from 'framer-motion';
+
+const rulesListVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.15,
+      when: 'beforeChildren',
+    },
+  },
+};
+
+const ruleItemVariants: Variants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const cardsContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
+const formVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
 
 export const BreakfastSection = () => {
   const { getTranslation } = useLang();
@@ -57,6 +58,7 @@ export const BreakfastSection = () => {
     guests: '1',
     dietaryRestrictions: false,
     restrictions: '',
+    menu: menus[tomorrowMenu].title,
   });
 
   const [inputFocused, setInputFocused] = useState(false);
@@ -64,14 +66,11 @@ export const BreakfastSection = () => {
   useEffect(() => {
     if (inputFocused) {
       const timeout = setTimeout(() => setInputFocused(false), 3000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
+      return () => clearTimeout(timeout);
     }
   }, [inputFocused]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -87,10 +86,7 @@ export const BreakfastSection = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // toast({
-    //   title: 'Breakfast Request Submitted',
-    //   description: `Your ${breakfastOptions.find(o => o.id === breakfastType)?.name} has been requested for ${formData.date}.`,
-    // });
+    // Submission logic here
   };
 
   const onOrder = useCallback(() => {
@@ -98,11 +94,62 @@ export const BreakfastSection = () => {
   }, []);
 
   return (
-    <section id="breakfast" className="px-[5%] py-20">
-      <div className="container mx-auto">
-        <h2 className={'text-center text-4xl font-bold mb-5'}>{getTranslation(`sections.menus.title`)}</h2>
+    <Section id={'Breakfast'}>
+      <SectionHeader text={getTranslation(`sections.menus.title`)!} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      {/* Rules Section */}
+      <motion.div
+        className="mt-6 space-y-4 max-w-2xl mx-auto text-start"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.ul className="space-y-3 text-gray-700" variants={rulesListVariants} initial="hidden" animate="visible">
+          {[
+            'Breakfast is served from 7:00 AM to 10:30 AM daily.',
+            getTranslation('sections.menus.rules.cutoffTime'),
+            getTranslation('sections.menus.rules.packaging'),
+            getTranslation('sections.menus.rules.dietaryRestrictions'),
+          ].map((text, i) => (
+            <motion.li key={i} className="flex items-start gap-2" variants={ruleItemVariants}>
+              <svg
+                className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={
+                    i === 0
+                      ? 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+                      : i === 1
+                        ? 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+                        : i === 2
+                          ? 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                          : 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                  }
+                />
+              </svg>
+              {/* Using dangerouslySetInnerHTML since your translations contain HTML */}
+              <span dangerouslySetInnerHTML={{ __html: text! }} />
+            </motion.li>
+          ))}
+        </motion.ul>
+      </motion.div>
+
+      {/* Menu Cards + Good to Know */}
+      <motion.div
+        className="flex flex-col gap-6 lg:grid lg:grid-cols-2 md:gap-10 max-w-5xl mx-auto mt-10"
+        variants={cardsContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.div variants={cardVariants}>
           <MenuCard
             label={`Order for ${nextAvailableDay}`}
             menuId={tomorrowMenu}
@@ -110,173 +157,143 @@ export const BreakfastSection = () => {
             remainingTime={remainingTime}
             onOrder={onOrder}
           />
+        </motion.div>
+
+        <motion.div variants={cardVariants}>
           <MenuCard label="Served Today" menuId={todayMenu} isOrderable={false} />
+        </motion.div>
+
+        <motion.div className="md:col-span-2 mt-2 p-4 bg-primary/60 rounded-lg" variants={cardVariants}>
+          <h4 className="font-medium text-secondary mb-2">Good to know</h4>
+          <p className="text-sm text-gray-700">{getTranslation('sections.menus.rules.goodToKnow')}</p>
+        </motion.div>
+      </motion.div>
+
+      {/* Form Section */}
+      <motion.div
+        className="p-6 md:p-8 mt-10 max-w-2xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={formVariants}
+      >
+        <div className="flex items-center gap-2 mb-4">
+          <CiForkAndKnife className="text-secondary text-4xl" />
+          <h3 className="text-2xl font-semibold">Request Breakfast</h3>
         </div>
 
-        <div className=" p-6 md:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <CiForkAndKnife className={'text-secondary text-4xl'} />
-                <h3 className="text-2xl font-semibold">Request Breakfast</h3>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className={`${inputFocused ? 'text-xl transition-all' : ''}`}>
-                      Name
-                    </label>
-                    <input
-                      ref={inputRef}
-                      onFocus={() => {
-                        setInputFocused(true);
-                      }}
-                      className={`appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none`}
-                      type="text"
-                      placeholder="Jane Doe"
-                      aria-label="Full name"
-                      id="name"
-                      name="name"
-                    />
-                    {/*<Input id="name" name="name" value={formData.name} onChange={handleChange} required />*/}
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="guests">Number of Guests</label>
-                    <select
-                      id="guests"
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleChange}
-                      className="w-full bg-transparent border-b-[1px] border-b-border p-1"
-                      required
-                    >
-                      {[1, 2, 3, 4, 5, 6].map(num => (
-                        <option key={num} value={num}>
-                          {num}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="date">Date</label>
-                    <input
-                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                      type="date"
-                      placeholder="Jane Doe"
-                      aria-label="Full name"
-                      id="date"
-                      name="date"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="time">Time</label>
-                    <input
-                      className="appearance-none bg-transparent border-b-[1px] border-b-border w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                      type="time"
-                      placeholder="Jane Doe"
-                      aria-label="Full name"
-                      id="time"
-                      name="time"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <input type={'checkbox'} id="dietary" checked={formData.dietaryRestrictions} onChange={handleDietaryChange} />
-                  <label htmlFor="dietary" className="font-normal">
-                    I have dietary restrictions
-                  </label>
-                </div>
-
-                {formData.dietaryRestrictions && (
-                  <div className="space-y-2">
-                    <label htmlFor="restrictions">Please specify your dietary restrictions</label>
-                    <Textarea
-                      id="restrictions"
-                      name="restrictions"
-                      value={formData.restrictions}
-                      onChange={handleChange}
-                      placeholder="e.g., allergies, vegetarian, vegan, etc."
-                    />
-                  </div>
-                )}
-
-                <button type="submit" className="bg-primary hover:bg-primary/80 text-gray-800 font-semibold py-2 px-4 rounded shadow cursor-pointer">
-                  Submit Breakfast Request
-                </button>
-              </form>
+        <form onSubmit={handleSubmit} className="space-y-4 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="name">Name</label>
+              <input
+                ref={inputRef}
+                name="name"
+                id="name"
+                onFocus={() => setInputFocused(true)}
+                onChange={handleChange}
+                className={`${
+                  inputFocused ? 'shadow-gray-400 shadow-md transition-all rounded-t-lg' : ''
+                } block w-full max-w-xl bg-white border-b border-border p-2 text-sm active:outline-none focus:outline-none`}
+                placeholder="Jane Doe"
+              />
             </div>
 
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Breakfast Rules & Information</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Breakfast is served from 7:00 AM to 10:30 AM daily.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.cutoffTime')! }} />
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Please request breakfast at least one day in advance.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <svg
-                    className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Special dietary requirements can be accommodated with advance notice.</span>
-                </li>
-              </ul>
-
-              <div className="mt-6 p-4 bg-primary/60 rounded-lg">
-                <h4 className="font-medium text-secondary mb-2">Good to know</h4>
-                <p className="text-sm text-gray-700">
-                  We source our ingredients locally for freshness and support of local businesses. Our eggs come from a nearby farm, our bread is
-                  baked fresh each morning, and our fruits are seasonal and locally sourced when possible.
-                </p>
-              </div>
+            <div className="space-y-2 flex flex-col">
+              <label htmlFor="guests">Number of Guests</label>
+              <select
+                id="guests"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                className="w-full max-w-xl bg-white border-b border-border p-2 text-sm active:outline-none focus:outline-none"
+                required
+              >
+                {[1, 2, 3, 4, 5, 6].map(num => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="date">Date</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                min={(() => {
+                  const tomorrow = new Date();
+                  tomorrow.setDate(tomorrow.getDate() + 2);
+                  return tomorrow.toISOString().split('T')[0];
+                })()}
+                onChange={handleChange}
+                className="block w-full max-w-xl bg-white border-b border-border p-2 text-sm active:outline-none focus:outline-none"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="time">Time</label>
+              <TimeInput
+                value={formData.time}
+                id="time"
+                name="time"
+                minTime={EARLIEST_BREAKFAST_SERVING_TIME}
+                maxTime={LATEST_BREAKFAST_SERVING_TIME}
+                onChange={handleChange}
+                interval={15}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="menu">
+              Menu <span className={'text-gray-600'}>(auto-selected)</span>
+            </label>
+            <input
+              className="w-full block max-w-xl text-gray-600 border-b border-border p-2 text-sm active:outline-none focus:outline-none"
+              value={formData.menu}
+              type={'text'}
+              id="menu"
+              name="menu"
+              disabled
+            />
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input type="checkbox" id="dietary" checked={formData.dietaryRestrictions} onChange={handleDietaryChange} />
+            <label htmlFor="dietary" className="font-normal">
+              I have dietary restrictions
+            </label>
+          </div>
+
+          {formData.dietaryRestrictions && (
+            <div className="space-y-2">
+              <label htmlFor="restrictions">Please specify</label>
+              <Textarea
+                id="restrictions"
+                name="restrictions"
+                onChange={handleChange}
+                value={formData.restrictions}
+                placeholder="Allergies, vegetarian, etc."
+                rows={4}
+              />
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={!canOrder}
+            className={`w-full mt-4 bg-secondary text-white py-2 rounded-md ${
+              !canOrder ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary-dark'
+            }`}
+          >
+            Submit Request
+          </button>
+        </form>
+      </motion.div>
+    </Section>
   );
 };

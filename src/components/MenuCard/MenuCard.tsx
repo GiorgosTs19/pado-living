@@ -1,9 +1,8 @@
-import Menus from '@/assets/Menus.json';
-import Croissant from '@/assets/images/breakfast/croissant.png';
-import FriedEgg from '@/assets/images/breakfast/fried-egg.png';
 import { cn, replaceString } from '@/utils';
 import { BsClock } from 'react-icons/bs';
 import { useLang } from '@/lang';
+import { Button } from 'components/Button';
+import { menus } from '@/constants.ts';
 
 type MenuCardProps = {
   label: string;
@@ -13,25 +12,12 @@ type MenuCardProps = {
   onOrder?: () => void;
 };
 
-const menus: Record<'A' | 'B', { title: string; items: string[]; imageSrc?: string }> = {
-  A: {
-    title: Menus.A.title,
-    items: Menus.A.items,
-    imageSrc: FriedEgg,
-  },
-  B: {
-    title: Menus.B.title,
-    items: Menus.B.items,
-    imageSrc: Croissant,
-  },
-};
-
 export function MenuCard({ label, menuId, isOrderable = false, remainingTime, onOrder }: MenuCardProps) {
   const menu = menus[menuId];
   const { getTranslation } = useLang();
 
   return (
-    <div className={cn('rounded-xl overflow-hidden shadow-lg transition-all hover:shadow-xl p-5 flex flex-col')}>
+    <div className={cn('rounded-2xl shadow-md hover:shadow-lg transition-transform hover:scale-[1.01] overflow-hidden  p-5 flex flex-col')}>
       <div className={'flex flex-col items-center gap-y-5 sm:gap-y-0 sm:flex-row sm:justify-between'}>
         <div
           className={`rounded-b-xl ${isOrderable ? 'bg-green-700' : 'bg-orange-600'}  py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-36 text-center`}
@@ -56,8 +42,8 @@ export function MenuCard({ label, menuId, isOrderable = false, remainingTime, on
             <li key={index} className="border-b border-gray-100 pb-2 last:border-0">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-medium text-gray-800">{item}</h3>
-                  {/*<p className="text-sm text-gray-500">{item.description}</p>*/}
+                  <h3 className="font-medium text-gray-800">{item.name}</h3>
+                  <p className="text-sm text-gray-500">{item.description}</p>
                 </div>
               </div>
             </li>
@@ -65,12 +51,7 @@ export function MenuCard({ label, menuId, isOrderable = false, remainingTime, on
         </ul>
       </div>
       {isOrderable ? (
-        <button
-          onClick={onOrder}
-          className="w-36 max-w-md rounded-xl bg-primary text-secondary text-sm md:text-base font-medium py-2 hover:bg-subtitle transition mx-auto cursor-pointer "
-        >
-          Order Now
-        </button>
+        <Button onClick={onOrder!}>Order Now</Button>
       ) : (
         <div className="text-center text-xs md:text-sm text-secondary font-semibold h-full">Not available for order</div>
       )}

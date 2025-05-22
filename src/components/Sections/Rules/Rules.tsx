@@ -1,9 +1,10 @@
-import { Collapsible } from 'components/Collapsible';
 import { TbSmokingNo } from 'react-icons/tb';
 import { GiPartyPopper } from 'react-icons/gi';
 import { FaDog, FaVolumeUp } from 'react-icons/fa';
 import { FaRegTrashCan } from 'react-icons/fa6';
 import { PiPlant } from 'react-icons/pi';
+import { useLang } from '@/lang';
+import { useCallback } from 'react';
 
 const styles = {
   li: 'flex items-start gap-3',
@@ -11,23 +12,28 @@ const styles = {
 };
 
 export const Rules = () => {
+  const { getTranslation } = useLang();
+
+  const translate = useCallback((key: string) => getTranslation(`sections.stayInformation.${key}`), [getTranslation]);
+
   return (
     <section id="rules" className="px-[5%] py-20">
       <div className="mx-auto">
-        <h2 className={'text-center text-4xl font-bold mb-10'}>Stay Information</h2>
+        {/*<h2 className={'text-center text-4xl font-bold mb-10'}>{translate('title')}</h2>*/}
 
         <div className="max-w-4xl 2xl:max-w-full 2xl:grid 2xl:grid-cols-2 mx-auto space-y-6 2xl:space-y-0 2xl:gap-8">
           {/* House Rules */}
-          <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex-grow">
-            <Collapsible title={'House Rules'} defaultOpen locked>
+          <div className="bg-white rounded-xl overflow-hidden flex-grow">
+            <div>
+              <h4 className="font-medium text-lg mb-3 border-b-2 border-b-border">House Rules</h4>
               <ul className="space-y-4">
                 <li className={styles.li}>
                   <span className={styles.iconWrapper}>
                     <TbSmokingNo className={'text-2xl'} />
                   </span>
                   <div>
-                    <h4 className="font-medium">No smoking</h4>
-                    <p className="text-muted-foreground text-sm">No smoking or vaping indoors.</p>
+                    <h4 className="font-medium">{translate('noSmoking.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('noSmoking.description')}</p>
                   </div>
                 </li>
 
@@ -41,8 +47,8 @@ export const Rules = () => {
                     </div>
                   </span>
                   <div>
-                    <h4 className="font-medium">No parties or events</h4>
-                    <p className="text-muted-foreground text-sm">No parties or drug use allowed.</p>
+                    <h4 className="font-medium">{translate('noParties.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('noParties.description')}</p>
                   </div>
                 </li>
 
@@ -51,8 +57,8 @@ export const Rules = () => {
                     <FaVolumeUp className="text-2xl" />
                   </span>
                   <div>
-                    <h4 className="font-medium">Quiet hours</h4>
-                    <p className="text-muted-foreground text-sm">Keep noise low, especially at night.</p>
+                    <h4 className="font-medium">{translate('quietHours.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('quietHours.description')}</p>
                   </div>
                 </li>
 
@@ -66,8 +72,8 @@ export const Rules = () => {
                     </div>
                   </span>
                   <div>
-                    <h4 className="font-medium">Pets policy</h4>
-                    <p className="text-muted-foreground text-sm">Mo pets are allowed.</p>
+                    <h4 className="font-medium">{translate('pets.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('pets.description')}</p>
                   </div>
                 </li>
 
@@ -76,8 +82,8 @@ export const Rules = () => {
                     <FaRegTrashCan className="text-xl" />
                   </span>
                   <div>
-                    <h4 className="font-medium">Beach equipment</h4>
-                    <p className="text-muted-foreground text-sm">Trash is collected daily. Clear bins at checkout.</p>
+                    <h4 className="font-medium">{translate('tidyDeparture.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('tidyDeparture.description')}</p>
                   </div>
                 </li>
 
@@ -86,17 +92,18 @@ export const Rules = () => {
                     <PiPlant className="text-2xl" />
                   </span>
                   <div>
-                    <h4 className="font-medium">Property respect</h4>
-                    <p className="text-muted-foreground text-sm">Turn off lights and reuse towels when possible.</p>
+                    <h4 className="font-medium">{translate('ecoFriendly.title')}</h4>
+                    <p className="text-muted-foreground text-sm">{translate('ecoFriendly.description')}</p>
                   </div>
                 </li>
               </ul>
-            </Collapsible>
+            </div>
           </div>
 
           {/* Amenities */}
-          <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 2xl">
-            <Collapsible title={'Amenities'} defaultOpen locked>
+          <div className=" overflow-hidden">
+            <div>
+              <h4 className="font-medium text-lg mb-3 border-b-2 border-b-border">Facilities</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <h4 className="font-medium text-lg mb-3">General</h4>
@@ -117,55 +124,43 @@ export const Rules = () => {
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Central heating</span>
+                      <span>Soundproof rooms</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Washing machine</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>Dryer</span>
+                      <span>Non-smoking rooms</span>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h4 className="font-medium text-lg mb-3">Entertainment</h4>
+                  <h4 className="font-medium text-lg mb-3">Bathroom</h4>
                   <ul className="space-y-2">
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Smart TV with Netflix</span>
+                      <span>Private bathroom with shower or bathtub</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Sound system</span>
+                      <span>Free toiletries</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Board games</span>
+                      <span>Towels & toilet paper</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Books and magazines</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>Outdoor grill</span>
+                      <span>Hairdryer</span>
                     </li>
                   </ul>
                 </div>
@@ -177,36 +172,59 @@ export const Rules = () => {
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Private beach access</span>
+                      <span>Private terrace or patio</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Beach chairs & umbrellas</span>
+                      <span>Outdoor furniture</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Outdoor shower</span>
+                      <span>Garden</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Patio with furniture</span>
+                      <span>Free on-site parking</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-lg mb-3">Entertainment</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Flat-screen TV</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Parking space</span>
+                      <span>Cable channels</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Satellite channels</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Television</span>
                     </li>
                   </ul>
                 </div>
               </div>
-            </Collapsible>
+            </div>
           </div>
         </div>
       </div>

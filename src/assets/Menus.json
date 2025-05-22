@@ -1,24 +1,84 @@
 {
-  "A" : {
-    "title" : "Classic Breakfast",
-    "items" : [
-      "Eggs",
-      "Toast",
-      "Butter",
-      "Jam",
-      "Fresh Juice",
-      "Coffee/Tea"
+  "A": {
+    "title": "Classic Breakfast",
+    "items": [
+      {
+        "name": "Cold cuts with bread roll",
+        "description": "A selection of cold cuts served with a fresh baguette-style bread."
+      },
+      {
+        "name": "Butter, jam and honey",
+        "description": "Traditional spreads to enjoy with bread or toast."
+      },
+      {
+        "name": "Seasonal fruit",
+        "description": "Fresh fruit of the season."
+      },
+      {
+        "name": "Coffee or tea",
+        "description": "Choice of freshly brewed coffee or aromatic tea."
+      },
+      {
+        "name": "Greek yogurt with muesli",
+        "description": "Creamy Greek yogurt topped with crunchy muesli."
+      },
+      {
+        "name": "Donut",
+        "description": "Soft and sweet donut, perfect for a morning treat."
+      },
+      {
+        "name": "Butter croissant",
+        "description": "Flaky and buttery French-style croissant."
+      },
+      {
+        "name": "Rusks",
+        "description": "Crunchy toasted bread slices, ideal with spreads."
+      },
+      {
+        "name": "Traditional Greek cheese pie",
+        "description": "Savory pie filled with feta cheese and wrapped in phyllo pastry."
+      }
     ]
   },
-  "B" : {
-    "title" : "Continental Breakfast",
+  "B": {
+    "title": "Continental Breakfast",
     "items": [
-      "Croissant",
-      "Yogurt",
-      "Granola",
-      "Fruit",
-      "Fresh Juice",
-      "Coffee/Tea"
+      {
+        "name": "Cold cuts with bread roll",
+        "description": "A selection of cold cuts served with a fresh baguette-style bread."
+      },
+      {
+        "name": "Butter, jam and chocolate spread",
+        "description": "Sweet and savory spreads to accompany your breakfast."
+      },
+      {
+        "name": "Seasonal fruit",
+        "description": "Fresh fruit of the season."
+      },
+      {
+        "name": "Coffee or tea",
+        "description": "Choice of freshly brewed coffee or aromatic tea."
+      },
+      {
+        "name": "Boiled egg",
+        "description": "Classic hard-boiled egg, served simply."
+      },
+      {
+        "name": "Cake",
+        "description": "Homemade-style slice of cake, ideal for morning sweetness."
+      },
+      {
+        "name": "Butter croissant",
+        "description": "Flaky and buttery French-style croissant."
+      },
+      {
+        "name": "Rusks",
+        "description": "Crunchy toasted bread slices, ideal with spreads."
+      },
+      {
+        "name": "Traditional Greek spinach pie",
+        "description": "Savory pie filled with spinach and herbs in flaky pastry."
+      }
     ]
   }
 }

@@ -1,8 +1,7 @@
-import { AnimatePresence, MotionValue, motion, useMotionValue, useSpring, useTransform } from 'motion/react';
-import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import { motion } from 'motion/react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { cn } from '@/utils';
-import { CiMenuBurger } from 'react-icons/ci';
-import { FiCoffee, FiMail } from 'react-icons/fi';
+import { FiCoffee } from 'react-icons/fi';
 import { FaLocationDot } from 'react-icons/fa6';
 import { useModal } from '@/hooks';
 import { FaTaxi } from 'react-icons/fa';
@@ -15,208 +14,105 @@ export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desk
 
   const items = useMemo(
     () => [
-      { title: 'Checking In / Out', icon: <TiInfoLargeOutline className={'text-2xl text-secondary'} />, href: '#Rules' },
-      { title: 'Breakfast', icon: <FiCoffee className={'text-lg text-secondary'} />, href: '#Breakfast' },
-      { title: 'Contact', icon: <FiMail className={'text-md text-secondary'} />, href: '#Contact' },
-      { title: 'Location', icon: <FaLocationDot className={'text-lg text-secondary'} />, href: '#Location' },
-      { title: 'Taxi', icon: <FaTaxi className={'text-md text-secondary'} />, action: openTaxiModal },
+      { title: 'Info', icon: <TiInfoLargeOutline className={'text-2xl text-primary lg:text-secondary'} />, href: '#CheckInOut' },
+      { title: 'Breakfast', icon: <FiCoffee className={'text-lg text-primary lg:text-secondary'} />, href: '#Breakfast' },
+      { title: 'Location', icon: <FaLocationDot className={'text-lg text-primary lg:text-secondary'} />, href: '#Location' },
+      { title: 'Taxi', icon: <FaTaxi className={'text-[1.2rem] text-primary lg:text-secondary'} />, action: openTaxiModal },
     ],
     [openTaxiModal]
   );
 
   return (
     <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
+      {/* Mobile Bottom Floating Dock */}
+      <FloatingDock
+        items={items}
+        className={cn(
+          'z-10 fixed bottom-0 left-0 right-0 bg-chill px-4 py-3 flex justify-around items-center h-16 rounded-t-2xl lg:hidden',
+          mobileClassName
+        )}
+      />
+
+      {/* Desktop Sticky Top Navigation */}
+      <FloatingDock
+        items={items}
+        className={cn(
+          'hidden lg:flex sticky top-4 left-[50%] transform justify-around -translate-x-1/2 bg-semiTransparent rounded-full max-w-lg mx-auto px-6 py-2 shadow-md gap-8 z-50',
+          desktopClassName
+        )}
+        labelsOnly
+      />
     </>
   );
 };
 
-const FloatingDockMobile = ({
+const FloatingDock = ({
   items,
   className,
+  labelsOnly = false,
 }: {
   items: { title: string; icon: ReactNode; href?: string; action?: () => void }[];
   className?: string;
+  labelsOnly?: boolean;
 }) => {
-  const [open, setOpen] = useState(false);
   return (
-    <div className={cn('fixed bottom-4 right-5 block md:hidden ', className)}>
-      <AnimatePresence>
-        {open && (
-          <motion.div layoutId="nav" className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2 z-100">
-            {items.map((item, idx) =>
-              item.action ? (
-                <motion.button
-                  onClick={item.action}
-                  className="cursor-pointer relative flex aspect-square items-center justify-center rounded-full border-2 border-border bg-primary"
-                >
-                  {item.icon}
-                </motion.button>
-              ) : (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 10,
-                    transition: {
-                      delay: idx * 0.05,
-                    },
-                  }}
-                  transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-                >
-                  <a
-                    href={item.href}
-                    key={item.title}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-primary"
-                  >
-                    {item.icon}
-                  </a>
-                </motion.div>
-              )
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button onClick={() => setOpen(!open)} className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-secondary">
-        <CiMenuBurger className={'text-primary'} size={24} />
-      </button>
-    </div>
-  );
-};
-
-const FloatingDockDesktop = ({
-  items,
-  className,
-}: {
-  items: { title: string; icon: ReactNode; href?: string; action?: () => void }[];
-  className?: string;
-}) => {
-  const mouseX = useMotionValue(Infinity);
-  return (
-    <motion.div
-      onMouseMove={e => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-      className={cn(
-        'fixed top-10 left-[50%] -translate-x-1/2 min-w-md mx-auto hidden h-16 items-end gap-4 rounded-2xl bg-semiTransparent px-4 pb-3 md:flex justify-between',
-        className
-      )}
-    >
+    <nav className={className} aria-label="Floating Navigation">
       {items.map(item => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer key={item.title} {...item} labelsOnly={labelsOnly} />
       ))}
-    </motion.div>
+    </nav>
   );
 };
 
 function IconContainer({
-  mouseX,
-  title,
   icon,
   href,
   action,
+  labelsOnly = false,
+  title,
 }: {
-  mouseX: MotionValue;
-  title: string;
   icon: ReactNode;
   href?: string;
   action?: () => void;
+  labelsOnly?: boolean;
+  title: string;
 }) {
-  const ref = useRef<HTMLDivElement | HTMLButtonElement>(null);
-
-  const distance = useTransform(mouseX, val => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-
-    return val - bounds.x - bounds.width / 2;
-  });
-
-  const widthTransform = useTransform(distance, [-150, 0, 150], [40, 60, 40]);
-  const heightTransform = useTransform(distance, [-150, 0, 150], [40, 60, 40]);
-
-  const widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  const heightTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-
-  const width = useSpring(widthTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  const height = useSpring(heightTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-
-  const widthIcon = useSpring(widthTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  const heightIcon = useSpring(heightTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-
-  const [hovered, setHovered] = useState(false);
-
-  return action ? (
-    <motion.button
-      // @ts-expect-error multiple ref types
-      ref={ref}
-      style={{ width, height }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onClick={action}
-      className="cursor-pointer relative flex aspect-square items-center justify-center rounded-full bg-primary"
+  const content = (
+    <motion.div
+      className={cn(
+        'flex flex-col items-center justify-center cursor-pointer rounded-full p-2 transition-colors duration-200',
+        labelsOnly ? 'hover:bg-primary ' : ''
+      )}
+      title={labelsOnly ? undefined : undefined}
     >
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            exit={{ opacity: 0, y: 2, x: '-50%' }}
-            className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-primary px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
-          >
-            {title}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <motion.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
-        {icon}
-      </motion.div>
-    </motion.button>
-  ) : (
-    <a href={href}>
-      <motion.div
-        // @ts-expect-error multiple ref types
-        ref={ref}
-        style={{ width, height }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-primary"
-      >
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, x: '-50%' }}
-              animate={{ opacity: 1, y: 0, x: '-50%' }}
-              exit={{ opacity: 0, y: 2, x: '-50%' }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
-            >
-              {title}
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <motion.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
-          {icon}
-        </motion.div>
-      </motion.div>
-    </a>
+      <div className={cn(labelsOnly ? 'hidden' : 'text-2xl')}>{icon}</div>
+      {labelsOnly && <span className="mt-1 text-xs font-semibold select-none">{(action ? title : '') + (href ? itemTitleFromHref(href) : '')}</span>}
+    </motion.div>
   );
+
+  if (action) {
+    return (
+      <motion.button onClick={action} type="button" aria-label="action button">
+        {content}
+      </motion.button>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={href} aria-label={`Navigate to ${itemTitleFromHref(href)}`}>
+        {content}
+      </a>
+    );
+  }
+
+  return content;
+}
+
+function itemTitleFromHref(href: string) {
+  // Map href to a simple label for the desktop nav label (can be customized)
+  if (href === '#CheckInOut') return 'Info';
+  if (href === '#Breakfast') return 'Breakfast';
+  if (href === '#Location') return 'Location';
+  return '';
 }
