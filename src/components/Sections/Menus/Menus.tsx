@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from
 import { Textarea } from '@/components/TextArea';
 import { CiForkAndKnife } from 'react-icons/ci';
 import { Section, SectionHeader } from 'components/Section';
-import { EARLIEST_BREAKFAST_SERVING_TIME, LATEST_BREAKFAST_SERVING_TIME, menus } from '@/constants.ts';
+import { EARLIEST_BREAKFAST_SERVING_TIME, LATEST_BREAKFAST_SERVING_TIME, menus, NAVIGATION } from '@/constants.tsx';
 import { TimeInput } from 'components/TimeInput';
 import { motion, Variants } from 'framer-motion';
 
@@ -94,7 +94,7 @@ export const BreakfastSection = () => {
   }, []);
 
   return (
-    <Section id={'Breakfast'}>
+    <Section id={NAVIGATION.MENUS.id}>
       <SectionHeader text={getTranslation(`sections.menus.title`)!} />
 
       {/* Rules Section */}
@@ -106,7 +106,7 @@ export const BreakfastSection = () => {
       >
         <motion.ul className="space-y-3 text-gray-700" variants={rulesListVariants} initial="hidden" animate="visible">
           {[
-            'Breakfast is served from 7:00 AM to 10:30 AM daily.',
+            getTranslation('sections.menus.rules.servingPeriod'),
             getTranslation('sections.menus.rules.cutoffTime'),
             getTranslation('sections.menus.rules.packaging'),
             getTranslation('sections.menus.rules.dietaryRestrictions'),
@@ -198,23 +198,18 @@ export const BreakfastSection = () => {
                 placeholder="Jane Doe"
               />
             </div>
-
-            <div className="space-y-2 flex flex-col">
-              <label htmlFor="guests">Number of Guests</label>
-              <select
-                id="guests"
-                name="guests"
-                value={formData.guests}
-                onChange={handleChange}
-                className="w-full max-w-xl bg-white border-b border-border p-2 text-sm active:outline-none focus:outline-none"
-                required
-              >
-                {[1, 2, 3, 4, 5, 6].map(num => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
+            <div className="space-y-2">
+              <label htmlFor="menu">
+                Menu <span className={'text-gray-600'}>(auto-selected)</span>
+              </label>
+              <input
+                className="w-full block max-w-xl text-gray-600 border-b border-border p-2 text-sm active:outline-none focus:outline-none"
+                value={formData.menu}
+                type={'text'}
+                id="menu"
+                name="menu"
+                disabled
+              />
             </div>
           </div>
 
@@ -246,20 +241,6 @@ export const BreakfastSection = () => {
                 interval={15}
               />
             </div>
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="menu">
-              Menu <span className={'text-gray-600'}>(auto-selected)</span>
-            </label>
-            <input
-              className="w-full block max-w-xl text-gray-600 border-b border-border p-2 text-sm active:outline-none focus:outline-none"
-              value={formData.menu}
-              type={'text'}
-              id="menu"
-              name="menu"
-              disabled
-            />
           </div>
 
           <div className="flex items-center space-x-2">

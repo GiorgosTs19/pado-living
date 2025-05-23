@@ -1,6 +1,8 @@
 import { useLang } from '@/lang';
 
 import { motion } from 'framer-motion';
+import { FaArrowDownLong } from 'react-icons/fa6';
+import { NAVIGATION } from '@/constants.tsx';
 
 export function Pado() {
   const { getTranslation } = useLang();
@@ -21,8 +23,12 @@ export function Pado() {
         transition={{ delay: 0.4, duration: 0.6 }}
         className="mt-4 text-xl sm:text-2xl italic"
       >
-        Where Design Meets Comfort
+        {getTranslation('sections.hero.description')}
       </motion.h2>
+
+      <a href={NAVIGATION.ROOMS.anchor} className="mt-36 text-2xl sm:text-3xl font-bold text-secondary mx-auto border border-border rounded-full p-3">
+        <FaArrowDownLong />
+      </a>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { BreakfastSection, Gallery, Location, Pado, Rules, TaxiModal } from '@/components';
+import { BreakfastSection, Footer, Gallery, Location, Pado, Rules, TaxiModal } from '@/components';
 import { CheckingInOut } from 'components/Sections/CheckingInOut';
 
 export function Homepage() {
@@ -11,6 +11,7 @@ export function Homepage() {
       <Rules />
       <Location />
       <TaxiModal />
+      <Footer />
     </>
   );
 }

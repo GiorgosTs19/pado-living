@@ -1,7 +1,6 @@
 import Menus from 'assets/Menus.json';
 import FriedEgg from 'assets/images/breakfast/fried-egg.png';
 import Croissant from 'assets/images/breakfast/croissant.png';
-
 type menuItemType = {
   name: string;
   description: string;
@@ -20,5 +19,36 @@ export const menus: Record<'A' | 'B', { title: string; items: menuItemType[]; im
     title: Menus.B.title,
     items: Menus.B.items,
     imageSrc: Croissant,
+  },
+};
+
+export const NAVIGATION = {
+  ROOMS: {
+    title: 'Our Rooms',
+    anchor: '#Rooms',
+    id: 'Rooms',
+  },
+  INFO: {
+    title: 'Info',
+    anchor: '#CheckInOut',
+    id: 'CheckInOut',
+  },
+  MENUS: {
+    title: 'Breakfast',
+    anchor: '#Breakfast',
+    id: 'Breakfast',
+  },
+  RULES: {
+    title: 'Rules',
+    anchor: '#Rules',
+    id: 'Rules',
+  },
+  LOCATION: {
+    title: 'Location',
+    anchor: '#Location',
+    id: 'Location',
+  },
+  TAXI: {
+    title: 'Taxi',
   },
 };

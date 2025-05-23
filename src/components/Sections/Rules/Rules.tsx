@@ -5,7 +5,8 @@ import { FaRegTrashCan } from 'react-icons/fa6';
 import { PiPlant } from 'react-icons/pi';
 import { useLang } from '@/lang';
 import { useCallback } from 'react';
-
+import { Section, SectionHeader } from 'components/Section';
+import { NAVIGATION } from '@/constants.tsx';
 const styles = {
   li: 'flex items-start gap-3',
   iconWrapper: 'bg-primary/10 text-secondary font-medium rounded-full h-10 w-10 flex items-center justify-center flex-shrink-0',
@@ -17,9 +18,9 @@ export const Rules = () => {
   const translate = useCallback((key: string) => getTranslation(`sections.stayInformation.${key}`), [getTranslation]);
 
   return (
-    <section id="rules" className="px-[5%] py-20">
+    <Section id={NAVIGATION.RULES.id} className="px-[5%] py-20">
       <div className="mx-auto">
-        {/*<h2 className={'text-center text-4xl font-bold mb-10'}>{translate('title')}</h2>*/}
+        <SectionHeader text={translate('title')!} />
 
         <div className="max-w-4xl 2xl:max-w-full 2xl:grid 2xl:grid-cols-2 mx-auto space-y-6 2xl:space-y-0 2xl:gap-8">
           {/* House Rules */}
@@ -228,6 +229,6 @@ export const Rules = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };

@@ -2,7 +2,7 @@ import { cn, replaceString } from '@/utils';
 import { BsClock } from 'react-icons/bs';
 import { useLang } from '@/lang';
 import { Button } from 'components/Button';
-import { menus } from '@/constants.ts';
+import { menus } from '@/constants.tsx';
 
 type MenuCardProps = {
   label: string;

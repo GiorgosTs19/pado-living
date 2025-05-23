@@ -1,6 +1,7 @@
 import { useLang } from '@/lang';
 import { Section, SectionHeader } from 'components/Section';
 import { motion } from 'framer-motion';
+import { NAVIGATION } from '@/constants.tsx';
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -15,7 +16,7 @@ export function CheckingInOut() {
   const { getTranslation } = useLang();
 
   return (
-    <Section id={'CheckInOut'}>
+    <Section id={NAVIGATION.INFO.id}>
       <SectionHeader text={getTranslation('sections.rules.title')!} />
 
       <div className="flex flex-col gap-8 text-base md:text-lg text-secondary w-full items-center">

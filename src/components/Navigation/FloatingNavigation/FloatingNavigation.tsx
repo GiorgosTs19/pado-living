@@ -6,6 +6,9 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { useModal } from '@/hooks';
 import { FaTaxi } from 'react-icons/fa';
 import { TiInfoLargeOutline } from 'react-icons/ti';
+import { LuGalleryVerticalEnd } from 'react-icons/lu';
+import { NAVIGATION } from '@/constants.tsx';
+import { BsClipboard2Check } from 'react-icons/bs';
 
 export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desktopClassName?: string; mobileClassName?: string }) => {
   const { setOpen } = useModal();
@@ -14,10 +17,28 @@ export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desk
 
   const items = useMemo(
     () => [
-      { title: 'Info', icon: <TiInfoLargeOutline className={'text-2xl text-primary lg:text-secondary'} />, href: '#CheckInOut' },
-      { title: 'Breakfast', icon: <FiCoffee className={'text-lg text-primary lg:text-secondary'} />, href: '#Breakfast' },
-      { title: 'Location', icon: <FaLocationDot className={'text-lg text-primary lg:text-secondary'} />, href: '#Location' },
-      { title: 'Taxi', icon: <FaTaxi className={'text-[1.2rem] text-primary lg:text-secondary'} />, action: openTaxiModal },
+      {
+        title: NAVIGATION.ROOMS.title,
+        icon: <LuGalleryVerticalEnd className={'text-xl text-primary lg:text-secondary'} />,
+        href: NAVIGATION.ROOMS.anchor,
+      },
+      {
+        title: NAVIGATION.INFO.title,
+        icon: <TiInfoLargeOutline className={'text-2xl text-primary lg:text-secondary'} />,
+        href: NAVIGATION.INFO.anchor,
+      },
+      { title: NAVIGATION.MENUS.title, icon: <FiCoffee className={'text-lg text-primary lg:text-secondary'} />, href: NAVIGATION.MENUS.anchor },
+      {
+        title: NAVIGATION.RULES.title,
+        icon: <BsClipboard2Check className={'text-lg text-primary lg:text-secondary'} />,
+        href: NAVIGATION.RULES.anchor,
+      },
+      {
+        title: NAVIGATION.LOCATION.title,
+        icon: <FaLocationDot className={'text-lg text-primary lg:text-secondary'} />,
+        href: NAVIGATION.LOCATION.anchor,
+      },
+      { title: NAVIGATION.TAXI.title, icon: <FaTaxi className={'text-[1.2rem] text-primary lg:text-secondary'} />, action: openTaxiModal },
     ],
     [openTaxiModal]
   );
@@ -37,7 +58,7 @@ export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desk
       <FloatingDock
         items={items}
         className={cn(
-          'hidden lg:flex sticky top-4 left-[50%] transform justify-around -translate-x-1/2 bg-semiTransparent rounded-full max-w-lg mx-auto px-6 py-2 shadow-md gap-8 z-50',
+          'hidden lg:flex sticky top-4 left-[50%] transform justify-around -translate-x-1/2 bg-semiTransparent rounded-full max-w-xl mx-auto px-6 py-2 shadow-md gap-8 z-50',
           desktopClassName
         )}
         labelsOnly
@@ -86,7 +107,7 @@ function IconContainer({
       title={labelsOnly ? undefined : undefined}
     >
       <div className={cn(labelsOnly ? 'hidden' : 'text-2xl')}>{icon}</div>
-      {labelsOnly && <span className="mt-1 text-xs font-semibold select-none">{(action ? title : '') + (href ? itemTitleFromHref(href) : '')}</span>}
+      {labelsOnly && <span className="mt-1 text-xs font-semibold select-none">{(action ? title : '') + (href ? title : '')}</span>}
     </motion.div>
   );
 
@@ -100,19 +121,11 @@ function IconContainer({
 
   if (href) {
     return (
-      <a href={href} aria-label={`Navigate to ${itemTitleFromHref(href)}`}>
+      <a href={href} aria-label={`Navigate to ${title}`}>
         {content}
       </a>
     );
   }
 
   return content;
-}
-
-function itemTitleFromHref(href: string) {
-  // Map href to a simple label for the desktop nav label (can be customized)
-  if (href === '#CheckInOut') return 'Info';
-  if (href === '#Breakfast') return 'Breakfast';
-  if (href === '#Location') return 'Location';
-  return '';
 }

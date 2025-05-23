@@ -2,11 +2,9 @@
   "sections":  {
     "hero" : {
       "title" : "Pado Living",
-      "description" : "Where your journey pauses, and ease begins."
+      "description" : "Where Design Meets Comfort."
     },
     "pado" : {
-      "title": "Welcome to Pado Living",
-      "description" : "Just a short walk from the beach, our freshly renovated rooms offer comfort, calm, and convenience in the heart of Faliraki.",
       "buttons": {
         "rooms" : "Rooms",
         "breakfast" : "Breakfast",
@@ -14,19 +12,19 @@
       }
     },
     "rules": {
-      "title" : "A Smooth Stay Starts Here",
+      "title" : "Arrival & Departure",
         "checkin": {
           "title": "Check-in",
           "standardTime": "Standard time: After 02:00 PM",
-          "keypad": "Self check-in available with keypad",
+          "keypad": "Self check-in (instructions will be sent to your registered phone number, 1 day prior to your arrival)",
           "earlyRequest": "Early check-in may be available upon request"
         },
 
         "checkout": {
           "title": "Check-out",
           "standardTime": "Standard time: By 11:00 AM",
-          "lockedDoor": "Make sure the front door is locked!",
-          "lightsOff": "Please turn off all lights and lock the doors"
+          "lockedDoor": "Make sure the front door is locked.",
+          "lightsOff": "Please turn off all lights and lock the doors."
         },
 
         "note": {
@@ -65,7 +63,7 @@
       "description-5":"Clean, modern bathroom with a walk-in shower and all essential toiletries provided."
     },
     "stayInformation" : {
-      "title" : "Stay Information",
+      "title" : "Guidelines & Amenities",
       "noSmoking" : {
         "title" : "No smoking",
         "description": "No smoking or vaping indoors."
@@ -94,6 +92,7 @@
     "menus": {
       "title": "Your Morning Choices",
       "rules": {
+        "servingPeriod" : "Breakfast is served from <strong>08:00 AM</strong> to <strong>11:00 AM</strong> daily.",
         "orderCutoff": "To ensure everything is fresh and ready on time, please take a moment to review the following breakfast guidelines.",
         "cutoffTime": "Orders must be placed <strong>by 8:00 PM</strong> for the following day.",
         "packaging": "Breakfast will be delivered in a <strong>sealed, eco-friendly paper box</strong> to maintain freshness and hygiene.",
@@ -106,6 +105,7 @@
       "notAvailable": "Not available for order"
     },
   "location": {
+    "title" : "Explore the Area",
     "taxi": {
       "callTaxi" : "Call a Taxi",
       "modalDescription": "We recommend trusted local drivers to help you get around quickly and safely",
@@ -119,6 +119,20 @@
         "phone" : "+30 693 665 6126"
       }
     }
-  }
+  },
+    "footer" : {
+      "place" : "Pado Living Rhodes",
+      "description" : "A peaceful stay in the heart of Faliraki",
+      "host" : "Your Host : Sandy",
+      "email" : "padosliving@gmail.com",
+      "phone" : "https://wa.me/306947709090",
+      "whatsUp" : "6947709090 (What's Up)",
+      "bookingLink" : "https://www.booking.com/hotel/gr/pado-living.el.html",
+      "findUsOnBooking" : "Find us on Booking.com",
+      "websiteBy" : "Website by",
+      "developer" : "George Tsourdiou",
+      "portfolioLink" : "https://giorgosts.com/",
+      "rightsReserved" : "© 2025 Pado Living Faliraki. All rights reserved."
+    }
   }
 }

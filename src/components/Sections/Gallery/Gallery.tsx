@@ -7,6 +7,7 @@ import { GalleryCardType } from '@/types.ts';
 import { GalleryItem } from 'components/Sections/Gallery/GalleryItem.tsx';
 import { Section, SectionHeader } from 'components/Section';
 import { useLang } from '@/lang';
+import { NAVIGATION } from '@/constants.tsx';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -17,7 +18,7 @@ export function Gallery() {
   const { getTranslation } = useLang();
 
   return (
-    <Section id="Rooms" className="px-[5%] max-w-7xl mx-auto sm:px-6 md:px-12 py-10">
+    <Section id={NAVIGATION.ROOMS.id} className="px-[5%] mx-auto sm:px-6 md:px-12 py-10">
       <SectionHeader text={getTranslation('sections.rooms.title')!} className={'md:text-5xl mb-4'} />
 
       <div className="columns-1 sm:columns-2 gap-4 space-y-4">
