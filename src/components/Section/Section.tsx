@@ -11,7 +11,7 @@ export function Section({ children, className, id }: { children: ReactNode; clas
 
 export function SectionHeader({ text, className }: { text: string; className?: string }) {
   return (
-    <header className={cn('text-start md:text-center text-2xl md:text-4xl font-bold mb-5', className)}>
+    <header className={cn('text-center text-2xl md:text-4xl font-bold mb-5', className)}>
       <h2>{text}</h2>
       <div className="flex items-center justify-center gap-3 mt-3 mb-6">
         <div className="h-px flex-1 bg-secondary/30 backdrop-blur-sm" />
