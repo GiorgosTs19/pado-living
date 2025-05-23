@@ -49,7 +49,7 @@ export function Footer() {
 
   const translate = useCallback((text: string) => getTranslation(`sections.footer.${text}`), [getTranslation]);
   return (
-    <footer className="bg-primary/70 text-sm text-gray-700 mt-20 px-[2%] lg:px-0 pt-10 pb-24 lg:pb-10 rounded-t-3xl lg:rounded-t-none">
+    <footer className="bg-primary/70 text-sm text-gray-700 mt-20 px-[2%] lg:px-0 pt-10 pb-32 lg:pb-10 rounded-t-3xl lg:rounded-t-none">
       <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-3 px-4">
         <div>
           <h2 className="text-xl font-bold text-gray-900 tracking-tight">{translate('place')}</h2>
