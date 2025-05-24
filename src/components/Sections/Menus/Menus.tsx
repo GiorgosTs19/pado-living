@@ -163,8 +163,11 @@ export const BreakfastSection = () => {
           <MenuCard label="Served Today" menuId={todayMenu} isOrderable={false} />
         </motion.div>
 
-        <motion.div className="md:col-span-2 mt-2 p-4 bg-primary/60 rounded-lg" variants={cardVariants}>
-          <h4 className="font-medium text-secondary mb-2">Good to know</h4>
+        <motion.div
+          className="md:col-span-2 mt-2 p-4 bg-primary/60 rounded-2xl w-full mx-auto flex flex-col gap-4 shadow-sm border border-primary/20"
+          variants={cardVariants}
+        >
+          <h4 className="font-medium text-secondary mb-2">{getTranslation('sections.menus.rules.goodToKnowTitle')}</h4>
           <p className="text-sm text-gray-700">{getTranslation('sections.menus.rules.goodToKnow')}</p>
         </motion.div>
       </motion.div>

@@ -2,6 +2,7 @@ import { useLang } from '@/lang';
 import { Section, SectionHeader } from 'components/Section';
 import { motion } from 'framer-motion';
 import { NAVIGATION } from '@/constants.tsx';
+import { FaLock, FaWifi } from 'react-icons/fa';
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -81,7 +82,32 @@ export function CheckingInOut() {
         </motion.div>
 
         <motion.div
-          className="mt-6 p-4 bg-primary/60 rounded-lg max-w-3xl mx-auto flex flex-col gap-3"
+          className="mt-8 p-5 bg-primary/10 rounded-2xl w-full max-w-3xl mx-auto flex flex-col gap-4 shadow-sm border border-primary/20"
+          variants={fadeUpVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {/* Title */}
+          <div>
+            <h4 className="text-lg font-semibold text-secondary">{getTranslation('sections.rules.wifi.title')}</h4>
+            <p className="text-sm text-secondary/70 mt-1">{getTranslation('sections.rules.wifi.description')}</p>
+          </div>
+
+          {/* Wi-Fi Name */}
+          <div className="flex items-center gap-3 text-gray-800">
+            <FaWifi className="text-primary text-lg" />
+            <span className="text-sm lg:text-base font-medium">{getTranslation('sections.rules.wifi.name')}</span>
+          </div>
+
+          {/* Wi-Fi Password */}
+          <div className="flex items-center gap-3 text-gray-800">
+            <FaLock className="text-primary text-base" />
+            <span className="text-sm lg:text-base font-mono">{getTranslation('sections.rules.wifi.password')}</span>
+          </div>
+        </motion.div>
+        <motion.div
+          className="mt-6 p-4 bg-primary/60 rounded-2xl w-full max-w-3xl mx-auto flex flex-col gap-4 shadow-sm border border-primary/20"
           variants={fadeUpVariant}
           initial="hidden"
           whileInView="visible"
