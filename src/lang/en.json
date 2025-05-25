@@ -108,7 +108,30 @@
       },
       "orderNow": "Order Now",
       "orderWithin": "Order within {{time}}",
-      "notAvailable": "Not available for order"
+      "notAvailable": "Not available for order",
+      "requestBreakfast" : "Request Breakfast",
+      "input" : {
+        "name": {
+          "label": "Name"
+        },
+        "menu" : {
+          "label":"Menu <span className={'text-gray-600'}>(auto-selected)</span>"
+        },
+        "date" : {
+          "label" : "Date"
+        },
+        "time" : {
+          "label" : "Time"
+        },
+        "dietaryRestrictions" : {
+          "label" : "I have dietary restrictions",
+          "placeholder" : "Allergies, vegetarian, etc."
+        },
+        "specify" : {
+          "label": "Please specify"
+        },
+        "submitButton" : "Submit Request"
+      }
     },
   "location": {
     "title" : "Explore the Area",
@@ -125,6 +148,13 @@
         "phone" : "+30 693 665 6126"
       }
     },
+    "getDirections" : " Get Directions",
+    "gettingHere" : "Getting Here",
+    "address": "Address",
+    "address1": "Kallithea Av 17",
+    "address2": "Faliraki",
+    "address3": "Rhodes Greece",
+    "nearbyPlace" : "Nearby Places",
     "airport" : {
       "title" : "From Rhodes International Airport (RHO):",
       "description" : "Approximately 15 km — 20 minutes by car depending on traffic."

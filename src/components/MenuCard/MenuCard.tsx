@@ -24,7 +24,7 @@ export function MenuCard({ label, menuId, remainingTime, onOrder }: MenuCardProp
           {label}
         </div>
         {remainingTime && (
-          <div className="flex items-center text-sm text-gray-500 gap-1">
+          <div className="flex items-center text-sm text-gray-500 gap-2">
             <BsClock className={'text-secondary text-2xl'} />
             <span>{replaceString(getTranslation('sections.menus.orderWithin')!, { time: remainingTime })}</span>
           </div>
@@ -46,7 +46,7 @@ export function MenuCard({ label, menuId, remainingTime, onOrder }: MenuCardProp
           ))}
         </ul>
       </div>
-      <Button onClick={onOrder!}>Order Now</Button>
+      <Button onClick={onOrder!}>{getTranslation('sections.menus.orderNow')}</Button>
     </div>
   );
 }

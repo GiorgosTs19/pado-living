@@ -172,13 +172,13 @@ export const BreakfastSection = () => {
       >
         <div className="flex items-center gap-2 mb-4">
           <CiForkAndKnife className="text-secondary text-4xl" />
-          <h3 className="text-2xl font-semibold">Request Breakfast</h3>
+          <h3 className="text-2xl font-semibold">{getTranslation('sections.menus.requestBreakfast')}</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">{getTranslation('sections.menus.input.name.label')}</label>
               <input
                 ref={inputRef}
                 name="name"
@@ -192,9 +192,7 @@ export const BreakfastSection = () => {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="menu">
-                Menu <span className={'text-gray-600'}>(auto-selected)</span>
-              </label>
+              <label htmlFor="menu" dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.input.menu.label')! }} />
               <input
                 className="w-full block max-w-xl text-gray-600 border-b border-border p-2 text-sm active:outline-none focus:outline-none"
                 value={formData.menu}
@@ -208,7 +206,7 @@ export const BreakfastSection = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="date">Date</label>
+              <label htmlFor="date">{getTranslation('sections.menus.input.date.label')}</label>
               <input
                 type="date"
                 id="date"
@@ -224,7 +222,7 @@ export const BreakfastSection = () => {
               <p className="text-xs text-gray-600" dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.cutoffTime')! }} />
             </div>
             <div className="space-y-2">
-              <label htmlFor="time">Time</label>
+              <label htmlFor="time">{getTranslation('sections.menus.input.time.label')}</label>
               <TimeInput
                 value={formData.time}
                 id="time"
@@ -240,19 +238,19 @@ export const BreakfastSection = () => {
           <div className="flex items-center space-x-2">
             <input type="checkbox" id="dietary" checked={formData.dietaryRestrictions} onChange={handleDietaryChange} />
             <label htmlFor="dietary" className="font-normal">
-              I have dietary restrictions
+              {getTranslation('sections.menus.input.dietaryRestrictions.label')}
             </label>
           </div>
 
           {formData.dietaryRestrictions && (
             <div className="space-y-2">
-              <label htmlFor="restrictions">Please specify</label>
+              <label htmlFor="restrictions">{getTranslation('sections.menus.input.specify.label')}</label>
               <Textarea
                 id="restrictions"
                 name="restrictions"
                 onChange={handleChange}
                 value={formData.restrictions}
-                placeholder="Allergies, vegetarian, etc."
+                placeholder={getTranslation('sections.menus.input.dietaryRestrictions.placeholder')}
                 rows={4}
               />
             </div>
@@ -265,7 +263,7 @@ export const BreakfastSection = () => {
               !canOrder ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary-dark'
             }`}
           >
-            Submit Request
+            {getTranslation('sections.menus.input.submitButton')}
           </button>
         </form>
       </motion.div>

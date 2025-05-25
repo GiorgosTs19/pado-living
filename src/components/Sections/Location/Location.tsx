@@ -90,14 +90,14 @@ export const Location = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <RiMapPin2Line className="text-secondary text-2xl lg:text-3xl" />
-              <h3 className="text-xl font-semibold">Address</h3>
+              <h3 className="text-xl font-semibold">{getTranslation('sections.location.address')}</h3>
             </div>
             <address className="flex flex-col md:flex-row not-italic mb-4 text-gray-700 gap-3">
-              <span>Kallithea Av 17</span>
+              <span>{getTranslation('sections.location.address1')}</span>
 
-              <span>Faliraki</span>
+              <span>{getTranslation('sections.location.address2')}</span>
 
-              <span>Rhodes Greece</span>
+              <span>{getTranslation('sections.location.address3')}</span>
             </address>
             <Button>
               <a
@@ -105,13 +105,13 @@ export const Location = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Get Directions
+                {getTranslation('sections.location.getDirections')}
               </a>
             </Button>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Getting Here</h3>
+            <h3 className="text-xl font-semibold mb-4">{getTranslation('sections.location.gettingHere')}</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <div>
@@ -145,9 +145,8 @@ export const Location = () => {
         </div>
       </div>
 
-      {/* Nearby places */}
       <div className="mt-12 px-[2%]">
-        <h3 className="text-2xl font-semibold mb-6 text-center">Nearby Places</h3>
+        <h3 className="text-2xl font-semibold mb-6 text-center">{getTranslation('sections.location.nearbyPlace')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {nearbyPlaces.map((place, index) => (
             <div key={index} className="p-5 border-b relative">
