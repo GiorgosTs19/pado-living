@@ -48,7 +48,7 @@ const formVariants: Variants = {
 export const BreakfastSection = () => {
   const { getTranslation } = useLang();
   const inputRef = useRef<HTMLInputElement>(null);
-  const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, todayMenu, nextAvailableDay } = useBreakfastMenuStatus();
+  const { isOrderingOpen: canOrder, remainingTime, availableMenu: tomorrowMenu, nextAvailableDay, cutoffTime } = useBreakfastMenuStatus();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -143,24 +143,14 @@ export const BreakfastSection = () => {
 
       {/* Menu Cards + Good to Know */}
       <motion.div
-        className="flex flex-col gap-6 lg:grid lg:grid-cols-2 md:gap-10 max-w-5xl mx-auto mt-10"
+        className="flex flex-col gap-6 md:gap-10 max-w-5xl mx-auto mt-10"
         variants={cardsContainerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
         <motion.div variants={cardVariants}>
-          <MenuCard
-            label={`Order for ${nextAvailableDay}`}
-            menuId={tomorrowMenu}
-            isOrderable={canOrder}
-            remainingTime={remainingTime}
-            onOrder={onOrder}
-          />
-        </motion.div>
-
-        <motion.div variants={cardVariants}>
-          <MenuCard label="Served Today" menuId={todayMenu} isOrderable={false} />
+          <MenuCard label={`Order for ${nextAvailableDay}`} menuId={tomorrowMenu} remainingTime={remainingTime} onOrder={onOrder} />
         </motion.div>
 
         <motion.div
@@ -224,13 +214,14 @@ export const BreakfastSection = () => {
                 id="date"
                 name="date"
                 min={(() => {
-                  const tomorrow = new Date();
-                  tomorrow.setDate(tomorrow.getDate() + 2);
+                  const tomorrow = new Date(cutoffTime);
+                  tomorrow.setDate(tomorrow.getDate() + 1);
                   return tomorrow.toISOString().split('T')[0];
                 })()}
                 onChange={handleChange}
                 className="block w-full max-w-xl bg-white border-b border-border p-2 text-sm active:outline-none focus:outline-none"
               />
+              <p className="text-xs text-gray-600" dangerouslySetInnerHTML={{ __html: getTranslation('sections.menus.rules.cutoffTime')! }} />
             </div>
             <div className="space-y-2">
               <label htmlFor="time">Time</label>

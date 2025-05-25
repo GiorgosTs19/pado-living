@@ -2,15 +2,15 @@ import { FiMail, FiPhone, FiCoffee } from 'react-icons/fi';
 import { useCallback, useMemo } from 'react';
 import { useLang } from '@/lang';
 import { useModal } from '@/hooks';
-import { NAVIGATION } from '@/constants.tsx';
+import { TbBrandBooking } from 'react-icons/tb';
 import { LuGalleryVerticalEnd } from 'react-icons/lu';
 import { TiInfoLargeOutline } from 'react-icons/ti';
 import { BsClipboard2Check } from 'react-icons/bs';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaTaxi } from 'react-icons/fa';
 import { motion } from 'motion/react';
+import { NAVIGATION } from '@/constants.tsx';
 import { cn } from '@/utils';
-import { TbBrandBooking } from 'react-icons/tb';
 
 export function Footer() {
   const { getTranslation } = useLang();
@@ -23,33 +23,34 @@ export function Footer() {
     () => [
       {
         title: NAVIGATION.ROOMS.title,
-        icon: <LuGalleryVerticalEnd className={'text-xl text-secondary'} />,
+        icon: <LuGalleryVerticalEnd className={'text-2xl text-secondary'} />,
         href: NAVIGATION.ROOMS.anchor,
       },
       {
         title: NAVIGATION.INFO.title,
-        icon: <TiInfoLargeOutline className={'text-2xl text-secondary'} />,
+        icon: <TiInfoLargeOutline className={'text-3xl text-secondary'} />,
         href: NAVIGATION.INFO.anchor,
       },
-      { title: NAVIGATION.MENUS.title, icon: <FiCoffee className={'text-lg text-secondary'} />, href: NAVIGATION.MENUS.anchor },
+      { title: NAVIGATION.MENUS.title, icon: <FiCoffee className={'text-2xl text-secondary'} />, href: NAVIGATION.MENUS.anchor },
       {
         title: NAVIGATION.RULES.title,
-        icon: <BsClipboard2Check className={'text-lg text-secondary'} />,
+        icon: <BsClipboard2Check className={'text-2xl text-secondary'} />,
         href: NAVIGATION.RULES.anchor,
       },
       {
         title: NAVIGATION.LOCATION.title,
-        icon: <FaLocationDot className={'text-lg text-secondary'} />,
+        icon: <FaLocationDot className={'text-2xl text-secondary'} />,
         href: NAVIGATION.LOCATION.anchor,
       },
-      { title: NAVIGATION.TAXI.title, icon: <FaTaxi className={'text-[1.2rem] text-secondary'} />, action: openTaxiModal },
+      { title: NAVIGATION.TAXI.title, icon: <FaTaxi className={'text-[1.5rem] text-secondary'} />, action: openTaxiModal },
     ],
     [openTaxiModal]
   );
 
   const translate = useCallback((text: string) => getTranslation(`sections.footer.${text}`), [getTranslation]);
+
   return (
-    <footer className="bg-primary/70 text-sm text-gray-700 mt-20 px-[2%] lg:px-0 pt-10 pb-48 lg:pb-10 rounded-t-3xl lg:rounded-t-none">
+    <footer className="bg-primary/70 text-sm text-gray-700 mt-20 px-[2%] lg:px-[5%] pt-10 pb-48 lg:pb-10 rounded-t-3xl lg:rounded-t-none">
       <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-3 px-4">
         <div>
           <h2 className="text-xl font-bold text-gray-900 tracking-tight">{translate('place')}</h2>
@@ -64,7 +65,7 @@ export function Footer() {
             <p className="font-medium">{translate('host')}</p>
             <p className="flex items-center gap-2">
               <FiMail className="text-gray-500" />
-              <a href={translate('email')} className="underline hover:text-gray-800 underline-offset-5">
+              <a href={`mailto:${translate('email')}`} className="underline hover:text-gray-800 underline-offset-5">
                 {translate('email')}
               </a>
             </p>
@@ -93,7 +94,7 @@ export function Footer() {
 
               if (item.action) {
                 return (
-                  <motion.button onClick={item.action} type="button" aria-label="action button">
+                  <motion.button key={item.title} onClick={item.action} type="button" aria-label="action button">
                     {content}
                   </motion.button>
                 );
@@ -101,7 +102,7 @@ export function Footer() {
 
               if (item.href) {
                 return (
-                  <a href={item.href} aria-label={`Navigate to ${item.title}`}>
+                  <a href={item.href} key={item.title} aria-label={`Navigate to ${item.title}`}>
                     {content}
                   </a>
                 );

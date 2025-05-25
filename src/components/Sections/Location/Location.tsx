@@ -1,5 +1,4 @@
 import { useLang } from '@/lang';
-import { useModal } from '@/hooks';
 import { RiMapPin2Line, RiRestaurantLine } from 'react-icons/ri';
 import { Section, SectionHeader } from 'components/Section';
 import { Button } from 'components/Button';
@@ -9,76 +8,6 @@ import { MdOutlineLocalGroceryStore } from 'react-icons/md';
 import { FaUmbrellaBeach } from 'react-icons/fa';
 import { ReactNode } from 'react';
 import { CiMedicalCross } from 'react-icons/ci';
-
-export function LocationS() {
-  const { getTranslation } = useLang();
-  const { setOpen } = useModal();
-
-  return (
-    <section id={'Location'} className="relative grid lg:grid-cols-2 gap-12 px-4 md:px-[5%] py-16 w-full">
-      {/* Info Column */}
-      <div className="relative backdrop-blur-xl space-y-8">
-        <header>
-          <h2 className="text-4xl font-serif font-bold text-secondary mb-2">How to Find Us</h2>
-          <p className="text-base text-chill">Kallithea Av 17, Faliraki, Rhodes</p>
-        </header>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {['2 min from the beach', 'Cafés & shops nearby', 'Parking available', 'Pharmacy 50m away'].map(item => (
-            <span key={item} className="bg-silent text-secondary text-sm font-medium px-3 py-1 rounded-full">
-              {item}
-            </span>
-          ))}
-        </div>
-
-        {/* Details */}
-        <div className="flex flex-col gap-y-3 text-sm md:text-base  text-secondary">
-          <h3 className="font-semibold mb-1">{getTranslation('sections.location.taxi.title')}</h3>
-          <button
-            className="cursor-pointer w-36 max-w-md rounded-xl bg-primary text-secondary text-sm md:text-base font-medium py-2 hover:bg-subtitle transition cursor-pointe "
-            onClick={() => setOpen(true)}
-            aria-label="Call a Taxi Modal"
-          >
-            {getTranslation('sections.location.taxi.callTaxi')}
-          </button>
-        </div>
-      </div>
-
-      {/* Map Column */}
-      <div className="relative rounded-3xl overflow-hidden shadow-xl border border-border w-full">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3213.7873505084463!2d28.2006972!3d36.3417033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x149565fee5b4848f%3A0xc92369b9fb6a7a6e!2sPado%20living!5e0!3m2!1sel!2sgr!4v1746914775195!5m2!1sel!2sgr"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen={false}
-          className={'min-h-[300px]'}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        {/*<div className={'absolute top-5 right-3 z-30 flex flex-col gap-2'}>*/}
-        {/*  <a*/}
-        {/*    href="https://maps.app.goo.gl/uPXqnkFvDFs59uL69"*/}
-        {/*    target="_blank"*/}
-        {/*    rel="noopener noreferrer"*/}
-        {/*    className=" rounded-xl text-secondary p-1 font-medium border-2 border-border transition"*/}
-        {/*  >*/}
-        {/*    <img src={Pharmacy} alt={'Pharmacy'} className={'h-6 w-6 md:h-10 md:w-10'} />*/}
-        {/*  </a>*/}
-        {/*  <a*/}
-        {/*    href="https://maps.app.goo.gl/ARGzPF4JKfstA7tcA"*/}
-        {/*    target="_blank"*/}
-        {/*    rel="noopener noreferrer"*/}
-        {/*    className="rounded-xl text-secondary p-1 font-medium border-2 border-border transition"*/}
-        {/*  >*/}
-        {/*    <img src={Groceries} alt={'Groceries'} className={'h-6 w-6 md:h-10 md:w-10'} />*/}
-        {/*  </a>*/}
-        {/*</div>*/}
-      </div>
-    </section>
-  );
-}
 
 interface NearbyPlace {
   name: string;
@@ -99,7 +28,7 @@ const nearbyPlaces: NearbyPlace[] = [
     icon: <FaUmbrellaBeach />,
   },
   {
-    name: 'Super Market Atlantic',
+    name: 'Atlantic',
     type: 'Grocery',
     distance: '~ 100m',
     description: 'Local market with fresh produce, essentials, and beach supplies.',
@@ -171,7 +100,11 @@ export const Location = () => {
               <span>Rhodes Greece</span>
             </address>
             <Button>
-              <a href="https://goo.gl/maps/HkGtC47sYbWCbCXZ6" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=36.34176392950494,28.20069768362238&travelmode=driving"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Get Directions
               </a>
             </Button>
@@ -185,8 +118,8 @@ export const Location = () => {
                   <IoCheckmarkDone className={'text-chill text-3xl'} />
                 </div>
                 <div>
-                  <span className="font-medium">From Rhodes International Airport (RHO):</span>
-                  <p className="text-sm text-muted-foreground">Approximately 15 km — 20 minutes by car depending on traffic.</p>
+                  <span className="font-medium">{getTranslation('sections.location.airport.title')}</span>
+                  <p className="text-sm text-muted-foreground">{getTranslation('sections.location.airport.description')}</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
@@ -194,10 +127,8 @@ export const Location = () => {
                   <IoCheckmarkDone className={'text-chill text-3xl'} />
                 </div>
                 <div>
-                  <span className="font-medium">Public Transportation:</span>
-                  <p className="text-sm text-muted-foreground">
-                    Bus stops are within walking distance. Local taxis and car rentals are also readily available.
-                  </p>
+                  <span className="font-medium">{getTranslation('sections.location.publicTransport.title')}</span>
+                  <p className="text-sm text-muted-foreground">{getTranslation('sections.location.publicTransport.description')}</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
@@ -205,8 +136,8 @@ export const Location = () => {
                   <IoCheckmarkDone className={'text-chill text-3xl'} />
                 </div>
                 <div>
-                  <span className="font-medium">Parking:</span>
-                  <p className="text-sm text-muted-foreground">Free on-premises parking.</p>
+                  <span className="font-medium">{getTranslation('sections.location.parking.title')}</span>
+                  <p className="text-sm text-muted-foreground">{getTranslation('sections.location.parking.description')}</p>
                 </div>
               </li>
             </ul>
@@ -215,7 +146,7 @@ export const Location = () => {
       </div>
 
       {/* Nearby places */}
-      <div className="mt-12 px-[5%]">
+      <div className="mt-12 px-[2%]">
         <h3 className="text-2xl font-semibold mb-6 text-center">Nearby Places</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {nearbyPlaces.map((place, index) => (

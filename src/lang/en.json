@@ -124,6 +124,18 @@
         "name": "Thomas",
         "phone" : "+30 693 665 6126"
       }
+    },
+    "airport" : {
+      "title" : "From Rhodes International Airport (RHO):",
+      "description" : "Approximately 15 km — 20 minutes by car depending on traffic."
+},
+    "publicTransport" : {
+      "title" : "Public Transportation:",
+      "description" : "Bus stops are within walking distance. Local taxis and car rentals are also readily available."
+    },
+    "parking" : {
+      "title" : "Parking:",
+      "description" : "Free on-premises parking."
     }
   },
     "footer" : {

@@ -19,26 +19,26 @@ export const FloatingNavigation = ({ desktopClassName, mobileClassName }: { desk
     () => [
       {
         title: NAVIGATION.ROOMS.title,
-        icon: <LuGalleryVerticalEnd className={'text-xl text-primary lg:text-secondary'} />,
+        icon: <LuGalleryVerticalEnd className={'text-2xl text-white lg:text-secondary'} />,
         href: NAVIGATION.ROOMS.anchor,
       },
       {
         title: NAVIGATION.INFO.title,
-        icon: <TiInfoLargeOutline className={'text-2xl text-primary lg:text-secondary'} />,
+        icon: <TiInfoLargeOutline className={'text-3xl text-white lg:text-secondary'} />,
         href: NAVIGATION.INFO.anchor,
       },
-      { title: NAVIGATION.MENUS.title, icon: <FiCoffee className={'text-lg text-primary lg:text-secondary'} />, href: NAVIGATION.MENUS.anchor },
+      { title: NAVIGATION.MENUS.title, icon: <FiCoffee className={'text-2xl text-white lg:text-secondary'} />, href: NAVIGATION.MENUS.anchor },
       {
         title: NAVIGATION.RULES.title,
-        icon: <BsClipboard2Check className={'text-lg text-primary lg:text-secondary'} />,
+        icon: <BsClipboard2Check className={'text-2xl text-white lg:text-secondary'} />,
         href: NAVIGATION.RULES.anchor,
       },
       {
         title: NAVIGATION.LOCATION.title,
-        icon: <FaLocationDot className={'text-lg text-primary lg:text-secondary'} />,
+        icon: <FaLocationDot className={'text-2xl text-white lg:text-secondary'} />,
         href: NAVIGATION.LOCATION.anchor,
       },
-      { title: NAVIGATION.TAXI.title, icon: <FaTaxi className={'text-[1.2rem] text-primary lg:text-secondary'} />, action: openTaxiModal },
+      { title: NAVIGATION.TAXI.title, icon: <FaTaxi className={'text-[1.4rem] text-white lg:text-secondary'} />, action: openTaxiModal },
     ],
     [openTaxiModal]
   );

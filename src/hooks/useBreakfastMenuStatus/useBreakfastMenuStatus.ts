@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 
 const CUTOFF_HOUR = 20;
-const INTERVAL_MS = 60_000;
+const INTERVAL_MS = 60000;
 
 function getCutoffFor(date: Date): Date {
   const cut = new Date(date);
@@ -25,13 +25,11 @@ type BreakfastMenuStatus = {
   isOrderingOpen: boolean;
   cutoffTime: Date;
   remainingTime: string;
-  todayMenu: 'A' | 'B';
   availableMenu: 'A' | 'B';
   nextAvailableDay: string;
 };
 
 export function useBreakfastMenuStatus(): BreakfastMenuStatus {
-  // 1) keep “now” ticking every minute
   const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
@@ -39,40 +37,33 @@ export function useBreakfastMenuStatus(): BreakfastMenuStatus {
     return () => clearInterval(id);
   }, []);
 
-  // 2) compute today’s cutoff and tomorrow’s cutoff
   const todayCutoff = useMemo(() => getCutoffFor(now), [now]);
   const tomorrowCutoff = useMemo(() => getCutoffFor(offsetDays(now, 1)), [now]);
 
-  // 3) pick the “next cutoff” based on current time
   const beforeCutoff = now < todayCutoff;
   const nextCutoff = beforeCutoff ? todayCutoff : tomorrowCutoff;
 
-  // 4) compute remaining time until that cutoff
   const remainingTime = useMemo(() => formatRemaining(nextCutoff.getTime() - now.getTime()), [now, nextCutoff]);
 
-  // 5) determine which day you can order for:
-  //    – before cutoff → tomorrow
-  //    – after cutoff → day after tomorrow
   const daysAhead = beforeCutoff ? 1 : 2;
   const nextDate = useMemo(() => offsetDays(now, daysAhead), [now, daysAhead]);
 
-  // 6) menus
-  const todayMenu = useMemo(() => getMenuForDate(now), [now]);
   const availableMenu = useMemo(() => getMenuForDate(nextDate), [nextDate]);
 
   return {
     isOrderingOpen: beforeCutoff,
     cutoffTime: nextCutoff,
     remainingTime,
-    todayMenu,
     availableMenu,
-    nextAvailableDay: nextDate.toLocaleDateString(undefined, {
+    nextAvailableDay: `${nextDate.toLocaleDateString('en-US', {
       weekday: 'long',
-    }),
+    })} ${nextDate.getDate().toString().padStart(2, '0')}/${(nextDate.getMonth() + 1).toString().padStart(2, '0')}`,
   };
 }
 
-// helper (unchanged)
 function getMenuForDate(date: Date): 'A' | 'B' {
-  return date.getDate() % 2 === 0 ? 'A' : 'B';
+  const reference = new Date(2024, 0, 1); // Jan 1, 2024
+  const diffInTime = date.setHours(0, 0, 0, 0) - reference.setHours(0, 0, 0, 0);
+  const diffInDays = Math.floor(diffInTime / (1000 * 60 * 60 * 24));
+  return diffInDays % 2 === 0 ? 'A' : 'B';
 }
